@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:improsso/presentation/account/buttons/log_out_button.dart';
 
 class Account extends StatefulWidget {
   const Account({Key? key}) : super(key: key);
@@ -13,7 +14,10 @@ class _AccountState extends State<Account> {
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: Text("AccountPage"),
+        child: Column(children: [
+          Text("AccountPage"),
+          LogOutButton(),
+        ]),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -13,7 +14,21 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: Text("HomePage"),
+        child: Column(
+          children: [
+            const Text("HomePage"),
+            TextButton(
+                onPressed: () {
+                  FirebaseFirestore.instance
+                      .collection("test")
+                      .doc("testString")
+                      .set({
+                    "random": "does it work?",
+                  });
+                },
+                child: Text("Insert something")),
+          ],
+        ),
       ),
     );
   }
