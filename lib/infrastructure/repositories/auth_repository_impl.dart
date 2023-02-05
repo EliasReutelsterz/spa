@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dartz/dartz.dart';
@@ -6,6 +7,7 @@ import 'package:improsso/domain/auth_domain/failures/auth_failures.dart';
 import 'package:improsso/domain/auth_domain/repositories/auth_repository.dart';
 import 'package:improsso/domain/auth_domain/usecases/check_if_username_in_use.dart';
 import 'package:improsso/infrastructure/extensions/firebase_user_mapper.dart';
+import 'package:improsso/routes/router.gr.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuth firebaseAuth;
@@ -78,9 +80,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> logOut() => Future.wait([
-        firebaseAuth.signOut(),
-      ]);
+  Future<void> logOut({required dynamic context}) {
+    AutoRouter.of(context).replace(const LoginPageRoute());
+    return Future.wait([
+      firebaseAuth.signOut(),
+    ]);
+  }
 
   @override
   Option<CustomUser> getSignedInUser() =>

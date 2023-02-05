@@ -16,8 +16,8 @@ class LoginPage extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [
               Theme.of(context).colorScheme.primary,
+              Theme.of(context).colorScheme.secondary,
               Theme.of(context).colorScheme.primary,
-              Theme.of(context).colorScheme.secondary
             ]),
       ),
       child: Scaffold(

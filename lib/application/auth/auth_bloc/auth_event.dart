@@ -7,4 +7,9 @@ class SignOutPressedEvent extends AuthEvent {
   SignOutPressedEvent({required this.context});
 }
 
+class DeleteAccountPressedEvent extends AuthEvent {
+  final dynamic context;
+  DeleteAccountPressedEvent({required this.context});
+}
+
 class AuthCheckRequestedEvent extends AuthEvent {}

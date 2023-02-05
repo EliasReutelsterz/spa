@@ -17,6 +17,9 @@ class LoginRegisterButton extends StatelessWidget {
         height: 40,
         child: ElevatedButton(
           style: ButtonStyle(
+              side: MaterialStateProperty.all<BorderSide>(
+                BorderSide(color: themeData.colorScheme.primary, width: 3),
+              ),
               backgroundColor: MaterialStateProperty.all<Color>(
                   themeData.colorScheme.onPrimary),
               elevation: MaterialStateProperty.all<double>(0.0),
@@ -30,6 +33,7 @@ class LoginRegisterButton extends StatelessWidget {
               child: Text(
                 this.buttonText,
                 style: themeData.textTheme.bodyText1!.copyWith(
+                  color: themeData.colorScheme.primary,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   letterSpacing: 3,

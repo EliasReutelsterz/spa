@@ -10,7 +10,7 @@ abstract class AuthRepository {
   Future<Either<AuthFailure, Unit>> loginWithEmailAndPassword(
       {required String email, required String password});
 
-  Future<void> logOut();
+  Future<void> logOut({required dynamic context});
 
   Option<CustomUser> getSignedInUser();
 }

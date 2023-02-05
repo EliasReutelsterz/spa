@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/auth/auth_bloc/auth_bloc.dart';
+import 'package:improsso/routes/router.gr.dart';
 
 class LogOutButton extends StatelessWidget {
   const LogOutButton({Key? key}) : super(key: key);

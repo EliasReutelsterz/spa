@@ -63,7 +63,14 @@ class LoginForm extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             children: [
               const SizedBox(height: 80),
-              const Text("Impresso"),
+              Text(
+                "Improsso",
+                style: themeData.textTheme.bodyText2!.copyWith(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 3,
+                    color: themeData.colorScheme.onPrimary),
+              ),
               const SizedBox(height: 60),
               Text(
                 "Please log in if you have an existing account",
@@ -71,62 +78,58 @@ class LoginForm extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     letterSpacing: 3,
-                    color: themeData.colorScheme.primaryVariant),
+                    color: themeData.colorScheme.onPrimary),
               ),
               const SizedBox(height: 40),
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
                 decoration: InputDecoration(
                     suffixIcon: Icon(Icons.email_outlined,
-                        color: themeData.colorScheme.onPrimary),
+                        color: themeData.colorScheme.primary),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          width: 2,
-                          color: themeData.colorScheme.onPrimary,
+                          width: 3,
+                          color: themeData.colorScheme.primary,
                         )),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                            width: 1, color: themeData.colorScheme.onPrimary)),
+                            width: 2, color: themeData.colorScheme.primary)),
                     labelText: "E-Mail",
-                    labelStyle:
-                        TextStyle(color: themeData.colorScheme.onPrimary),
-                    fillColor: themeData.colorScheme.primaryVariant,
+                    labelStyle: TextStyle(color: themeData.colorScheme.primary),
+                    fillColor: themeData.colorScheme.onPrimary,
                     filled: true),
-                cursorColor: themeData.colorScheme.onPrimary,
+                cursorColor: themeData.colorScheme.primary,
                 validator: formValidators.validate_email,
               ),
               const SizedBox(height: 20),
               TextFormField(
                 autocorrect: false,
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
                 obscureText: true,
                 decoration: InputDecoration(
                     suffixIcon: Icon(
                       Icons.password_outlined,
-                      color: themeData.colorScheme.onPrimary,
+                      color: themeData.colorScheme.primary,
                     ),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          width: 2,
-                          color: themeData.colorScheme.onPrimary,
+                          width: 3,
+                          color: themeData.colorScheme.primary,
                         )),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                            width: 1, color: themeData.colorScheme.onPrimary)),
+                            width: 2, color: themeData.colorScheme.primary)),
                     labelText: "Password",
-                    labelStyle:
-                        TextStyle(color: themeData.colorScheme.onPrimary),
-                    fillColor: themeData.colorScheme.primaryVariant,
+                    labelStyle: TextStyle(color: themeData.colorScheme.primary),
+                    fillColor: themeData.colorScheme.onPrimary,
                     filled: true),
-                cursorColor: themeData.colorScheme.primaryVariant,
+                cursorColor: themeData.colorScheme.primary,
                 validator: formValidators.validate_password,
               ),
               const SizedBox(height: 20),
@@ -170,7 +173,7 @@ class LoginForm extends StatelessWidget {
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 3,
-                        color: themeData.colorScheme.primaryVariant),
+                        color: themeData.colorScheme.onPrimary),
                   ),
                   TextSpan(
                       text: "register!",
@@ -178,7 +181,7 @@ class LoginForm extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                           letterSpacing: 3,
-                          color: themeData.colorScheme.primaryVariant,
+                          color: themeData.colorScheme.onPrimary,
                           decoration: TextDecoration.underline),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
