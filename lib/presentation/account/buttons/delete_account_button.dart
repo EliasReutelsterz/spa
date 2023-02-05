@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/auth/auth_bloc/auth_bloc.dart';
-import 'package:improsso/domain/user_domain/entities/user_entity.dart';
 
 class DeleteAccountButton extends StatelessWidget {
   final TextStyle style;

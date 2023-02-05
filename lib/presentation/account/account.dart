@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:improsso/presentation/account/buttons/add_profile_picture_button.dart';
 import 'package:improsso/presentation/account/buttons/delete_account_button.dart';
 import 'package:improsso/presentation/account/buttons/log_out_button.dart';
 
@@ -23,6 +24,7 @@ class _AccountState extends State<Account> {
           Text("AccountPage"),
           LogOutButton(),
           DeleteAccountButton(style: _style),
+          AddProfilePictureButton(),
         ]),
       ),
     );
