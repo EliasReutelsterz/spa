@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:improsso/application/auth/observer_bloc/observer_bloc.dart';
+import 'package:improsso/domain/user_domain/repositories/user_repository.dart';
 import 'presentation/account/account.dart';
 import 'presentation/home/home.dart';
+import 'package:improsso/injection.dart' as di;
 
 class RootWidget extends StatefulWidget {
   const RootWidget({Key? key}) : super(key: key);
@@ -14,41 +18,44 @@ class _RootWidgetState extends State<RootWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: const [
-          Account(),
-          Home(),
-        ],
-      ),
-      appBar: AppBar(
-        title: Text(
-          "Improsso",
-          style: Theme.of(context).textTheme.headline1,
+    return BlocProvider(
+      create: (context) => ObserverBloc()..add(ObserverveAllEvent()),
+      child: Scaffold(
+        body: IndexedStack(
+          index: _currentIndex,
+          children: const [
+            Account(),
+            Home(),
+          ],
         ),
-        centerTitle: true,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Theme.of(context).colorScheme.onPrimary,
-        unselectedItemColor: Theme.of(context).colorScheme.tertiary,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        currentIndex: _currentIndex,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Account",
+        appBar: AppBar(
+          title: Text(
+            "Improsso",
+            style: Theme.of(context).textTheme.headline1,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-        ],
-        backgroundColor: Theme.of(context).bottomAppBarColor,
+          centerTitle: true,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Theme.of(context).colorScheme.onPrimary,
+          unselectedItemColor: Theme.of(context).colorScheme.tertiary,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          currentIndex: _currentIndex,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Account",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+            ),
+          ],
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+        ),
       ),
     );
   }

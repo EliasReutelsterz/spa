@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:improsso/application/auth/auth_bloc/auth_bloc.dart';
+import 'package:improsso/application/auth/observer_bloc/observer_bloc.dart';
 import 'package:improsso/application/auth/signup_bloc/signupform_bloc.dart';
 import 'package:improsso/domain/auth_domain/repositories/auth_repository.dart';
 import 'package:improsso/infrastructure/repositories/auth_repository_impl.dart';

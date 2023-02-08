@@ -41,7 +41,7 @@ class UserModelFIREBASE {
   }
 
   factory UserModelFIREBASE.fromFirestoreAsDocument(
-      DocumentSnapshot<Map<String, dynamic>> doc) {
+      DocumentSnapshot<dynamic> doc) {
     return UserModelFIREBASE.fromMap(doc.data()!).copyWith(id: doc.id);
   }
 

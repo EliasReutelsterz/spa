@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:improsso/presentation/account/buttons/add_profile_picture_button.dart';
 import 'package:improsso/presentation/account/buttons/delete_account_button.dart';
 import 'package:improsso/presentation/account/buttons/log_out_button.dart';
+import 'package:improsso/presentation/account/widgets/profile_picture.dart';
+import 'package:improsso/presentation/account/widgets/test_for_bloc.dart';
 
-class Account extends StatefulWidget {
+class Account extends StatelessWidget {
   const Account({Key? key}) : super(key: key);
 
-  @override
-  _AccountState createState() => _AccountState();
-}
-
-class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     final TextStyle _style = Theme.of(context)
@@ -21,10 +18,12 @@ class _AccountState extends State<Account> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(children: [
-          Text("AccountPage"),
-          LogOutButton(),
+          const Text("AccountPage"),
+          const ProfilePicture(),
+          const LogOutButton(),
           DeleteAccountButton(style: _style),
-          AddProfilePictureButton(),
+          const AddProfilePictureButton(),
+          const TestForBloc(),
         ]),
       ),
     );
