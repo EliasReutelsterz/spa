@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:improsso/application/auth/observer_bloc/observer_bloc.dart';
-import 'package:improsso/domain/user_domain/repositories/user_repository.dart';
+import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
+import 'package:improsso/application/user/pictures/bloc/pictures_bloc.dart';
 import 'presentation/account/account.dart';
 import 'presentation/home/home.dart';
 import 'package:improsso/injection.dart' as di;
@@ -18,8 +18,15 @@ class _RootWidgetState extends State<RootWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ObserverBloc()..add(ObserverveAllEvent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ObserverBloc()..add(ObserverveAllEvent()),
+        ),
+        BlocProvider(
+          create: (context) => PicturesBloc()..add(LoadPicturesEvent()),
+        ),
+      ],
       child: Scaffold(
         body: IndexedStack(
           index: _currentIndex,

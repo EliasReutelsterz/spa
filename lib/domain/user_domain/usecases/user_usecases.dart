@@ -14,7 +14,7 @@ class UserUsecases {
         User user = FirebaseAuth.instance.currentUser!;
         final storageRef = FirebaseStorage.instance.ref();
         final folderRef =
-            storageRef.child('/images/${user.uid}/profile_picture.jpg');
+            storageRef.child('/images/${user.uid}/profile_picture');
         folderRef.putFile(photo);
       }
     });

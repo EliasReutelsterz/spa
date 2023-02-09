@@ -3,7 +3,8 @@ import 'package:improsso/presentation/account/buttons/add_profile_picture_button
 import 'package:improsso/presentation/account/buttons/delete_account_button.dart';
 import 'package:improsso/presentation/account/buttons/log_out_button.dart';
 import 'package:improsso/presentation/account/widgets/profile_picture.dart';
-import 'package:improsso/presentation/account/widgets/test_for_bloc.dart';
+import 'package:improsso/presentation/account/widgets/test_for_observer_bloc.dart';
+import 'package:improsso/presentation/account/widgets/test_for_pictures_bloc.dart';
 
 class Account extends StatelessWidget {
   const Account({Key? key}) : super(key: key);
@@ -23,7 +24,8 @@ class Account extends StatelessWidget {
           const LogOutButton(),
           DeleteAccountButton(style: _style),
           const AddProfilePictureButton(),
-          const TestForBloc(),
+          const TestForObserverBloc(),
+          const TestForPicturesBloc(),
         ]),
       ),
     );

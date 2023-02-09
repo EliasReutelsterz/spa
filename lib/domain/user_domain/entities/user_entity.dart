@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:improsso/domain/auth_domain/entities/id.dart';
 
 class UserEntity {
