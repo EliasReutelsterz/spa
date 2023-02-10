@@ -10,15 +10,33 @@ class DeleteProfilePicture extends StatelessWidget {
     return BlocBuilder<PicturesBloc, PicturesState>(
       builder: (context, picturesState) {
         if (picturesState is PicturesSuccess) {
-          return IconButton(
-              onPressed: (() {
-                BlocProvider.of<PicturesBloc>(context)
-                    .add(DeleteProfilePictureEvent(context: context));
-              }),
-              icon: const Icon(Icons.delete_outline));
+          return Opacity(
+            opacity: 0.7,
+            child: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              radius: 20,
+              child: IconButton(
+                  color: Theme.of(context).colorScheme.primary,
+                  onPressed: (() {
+                    BlocProvider.of<PicturesBloc>(context)
+                        .add(DeleteProfilePictureEvent(context: context));
+                  }),
+                  icon: Icon(Icons.delete_outline,
+                      color: Theme.of(context).colorScheme.onPrimary)),
+            ),
+          );
         } else {
-          return IconButton(
-              onPressed: (() {}), icon: const Icon(Icons.delete_outline));
+          return Opacity(
+            opacity: 0.7,
+            child: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              radius: 20,
+              child: IconButton(
+                  onPressed: (() {}),
+                  icon: Icon(Icons.delete_outline,
+                      color: Theme.of(context).colorScheme.onPrimary)),
+            ),
+          );
         }
       },
     );

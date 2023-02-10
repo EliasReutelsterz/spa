@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/user/pictures_bloc/bloc/pictures_bloc.dart';
 
-class TestForPicturesBloc extends StatelessWidget {
-  const TestForPicturesBloc({Key? key}) : super(key: key);
+class ProfilePicture extends StatelessWidget {
+  const ProfilePicture({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -42,15 +42,15 @@ class AppTheme {
 
   static final ThemeData theme = ThemeData(
     scaffoldBackgroundColor: _scaffoldBackgroundCoor,
-    appBarTheme: AppBarTheme(
-      titleTextStyle: const TextStyle(
+    appBarTheme: const AppBarTheme(
+      titleTextStyle: TextStyle(
         color: _primaryTextColor,
       ),
       color: _appBarColor,
-      iconTheme: const IconThemeData(color: _iconColor),
+      iconTheme: IconThemeData(color: _iconColor),
     ),
     bottomAppBarColor: _bottomAppBarColor,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: _primary,
       secondary: _secondary,
       tertiary: _tertiary,
