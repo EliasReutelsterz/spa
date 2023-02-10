@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
-import 'package:improsso/application/user/pictures/bloc/pictures_bloc.dart';
+import 'package:improsso/application/user/pictures_bloc/bloc/pictures_bloc.dart';
 import 'presentation/account/account.dart';
 import 'presentation/home/home.dart';
 import 'package:improsso/injection.dart' as di;

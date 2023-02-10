@@ -1,10 +1,10 @@
-import 'dart:typed_data';
-
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:improsso/core/errors/erros.dart';
 import 'package:improsso/domain/auth_domain/repositories/auth_repository.dart';
 import 'package:improsso/domain/user_domain/entities/pictures_entity.dart';
@@ -60,5 +60,42 @@ class UserRepositoryImpl implements UserRepository {
       }
     });
     return failureOrPicturesEntity;
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deleteProfilePicture() async {
+    final userOption = sl<AuthRepository>().getSignedInUser();
+    final currentUser =
+        userOption.getOrElse(() => throw NotAuthentificatedError());
+    final storageRef = FirebaseStorage.instance.ref();
+    final pathReference =
+        storageRef.child("/images/${currentUser.id.value}/profile_picture");
+    try {
+      return await pathReference.delete().then((value) => right(unit));
+    } catch (e) {
+      return left(GeneralFailure());
+    }
+  }
+
+  Future<Either<Failure, Unit>> pickAndUploadProfilePicture() async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      return await picker
+          .pickImage(source: ImageSource.gallery, imageQuality: 1)
+          .then((pickedFile) async {
+        if (pickedFile != null) {
+          File photo = File(pickedFile.path);
+          User user = FirebaseAuth.instance.currentUser!;
+          final storageRef = FirebaseStorage.instance.ref();
+          final folderRef =
+              storageRef.child('/images/${user.uid}/profile_picture');
+          return await folderRef.putFile(photo).then((p0) => right(unit));
+        } else {
+          return left(GeneralFailure());
+        }
+      });
+    } catch (e) {
+      return left(GeneralFailure());
+    }
   }
 }

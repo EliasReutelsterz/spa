@@ -8,4 +8,8 @@ abstract class UserRepository {
   Stream<Either<UserFailure, UserEntity>> getAllData();
 
   Future<Either<Failure, PicturesEntity>> loadProfilePicture();
+
+  Future<Either<Failure, Unit>> deleteProfilePicture();
+
+  Future<Either<Failure, Unit>> pickAndUploadProfilePicture();
 }

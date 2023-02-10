@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:improsso/application/user/pictures/bloc/pictures_bloc.dart';
+import 'package:improsso/application/user/pictures_bloc/bloc/pictures_bloc.dart';
 
 class TestForPicturesBloc extends StatelessWidget {
   const TestForPicturesBloc({Key? key}) : super(key: key);
@@ -12,7 +12,8 @@ class TestForPicturesBloc extends StatelessWidget {
         if (picturesState is PicturesSuccess) {
           return picturesState.picturesEntity.profilePicture;
         } else {
-          return Placeholder();
+          return const Image(
+              image: AssetImage("assets/images/profile_default.jpeg"));
         }
       },
     );

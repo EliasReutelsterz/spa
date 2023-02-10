@@ -12,7 +12,7 @@ class TestForObserverBloc extends StatelessWidget {
         if (observerState is ObserverSuccess) {
           return Text(observerState.userEntity.username);
         } else {
-          return Placeholder();
+          return const Placeholder();
         }
       },
     );
