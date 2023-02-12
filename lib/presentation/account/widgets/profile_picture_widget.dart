@@ -25,7 +25,10 @@ class ProfilePictureWidget extends StatelessWidget {
                       Radius.circular(10),
                     ),
                     child: SizedBox(
-                        height: 200, width: 200, child: ProfilePicture()),
+                        height: 200,
+                        width: 200,
+                        child: FittedBox(
+                            fit: BoxFit.cover, child: ProfilePicture())),
                   ),
                 ),
                 Positioned(

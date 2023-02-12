@@ -8,7 +8,6 @@ part 'observer_event.dart';
 part 'observer_state.dart';
 
 class ObserverBloc extends Bloc<ObserverEvent, ObserverState> {
-  //final UserRepository userRepository;
   StreamSubscription<Either<UserFailure, UserEntity>>? _userdataStreamSub;
 
   ObserverBloc() : super(ObserverInitial()) {

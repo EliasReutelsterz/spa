@@ -77,6 +77,7 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 
+  @override
   Future<Either<Failure, Unit>> pickAndUploadProfilePicture() async {
     try {
       final ImagePicker picker = ImagePicker();
@@ -93,6 +94,20 @@ class UserRepositoryImpl implements UserRepository {
         } else {
           return left(GeneralFailure());
         }
+      });
+    } catch (e) {
+      return left(GeneralFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateUsername(String input) async {
+    try {
+      User user = FirebaseAuth.instance.currentUser!;
+      return FirebaseFirestore.instance.collection("users").doc(user.uid).set({
+        "username": input,
+      }).then((value) {
+        return right(unit);
       });
     } catch (e) {
       return left(GeneralFailure());

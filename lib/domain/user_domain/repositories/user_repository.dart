@@ -12,4 +12,6 @@ abstract class UserRepository {
   Future<Either<Failure, Unit>> deleteProfilePicture();
 
   Future<Either<Failure, Unit>> pickAndUploadProfilePicture();
+
+  Future<Either<Failure, Unit>> updateUsername(String input);
 }

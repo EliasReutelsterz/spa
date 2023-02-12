@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/auth/auth_bloc/auth_bloc.dart';
 
 class DeleteAccountButton extends StatelessWidget {
-  final TextStyle style;
-  const DeleteAccountButton({Key? key, required this.style}) : super(key: key);
+  const DeleteAccountButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +21,18 @@ class DeleteAccountButton extends StatelessWidget {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text("Cancel", style: style)),
+                        child: Text("Cancel",
+                            style: TextStyle(
+                                color: themeData.colorScheme.onPrimary,
+                                fontSize: 20))),
                     TextButton(
                         onPressed: () async {
                           BlocProvider.of<AuthBloc>(context)
                               .add(DeleteAccountPressedEvent(context: context));
                         },
-                        child: Text(
+                        child: const Text(
                           "Delete",
-                          style: style.copyWith(color: Colors.red),
+                          style: TextStyle(color: Colors.red, fontSize: 20),
                         ))
                   ],
                 ));

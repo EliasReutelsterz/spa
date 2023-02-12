@@ -11,7 +11,7 @@ class DeleteProfilePicture extends StatelessWidget {
       builder: (context, picturesState) {
         if (picturesState is PicturesSuccess) {
           return Opacity(
-            opacity: 0.7,
+            opacity: 0.85,
             child: CircleAvatar(
               backgroundColor: Theme.of(context).colorScheme.primary,
               radius: 20,

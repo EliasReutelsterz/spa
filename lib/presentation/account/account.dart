@@ -9,10 +9,6 @@ class Account extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle _style = Theme.of(context)
-        .textTheme
-        .headline2!
-        .copyWith(fontSize: 20, color: Theme.of(context).colorScheme.onPrimary);
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -20,9 +16,17 @@ class Account extends StatelessWidget {
           const ProfilePictureWidget(),
           const SizedBox(height: 20),
           const TestForObserverBloc(),
-          const SizedBox(height: 20),
-          const LogOutButton(),
-          DeleteAccountButton(style: _style),
+          const SizedBox(height: 60),
+          SizedBox(
+            width: 250,
+            child: Column(
+              children: const [
+                LogOutButton(),
+                SizedBox(height: 10),
+                DeleteAccountButton(),
+              ],
+            ),
+          ),
         ]),
       ),
     );
