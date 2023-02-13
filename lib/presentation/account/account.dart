@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:improsso/presentation/account/buttons/delete_account_button.dart';
 import 'package:improsso/presentation/account/buttons/log_out_button.dart';
+import 'package:improsso/presentation/account/widgets/profile_form.dart';
 import 'package:improsso/presentation/account/widgets/profile_picture_widget.dart';
-import 'package:improsso/presentation/account/widgets/test_for_observer_bloc.dart';
 
 class Account extends StatelessWidget {
   const Account({Key? key}) : super(key: key);
@@ -15,7 +15,9 @@ class Account extends StatelessWidget {
         child: Column(children: [
           const ProfilePictureWidget(),
           const SizedBox(height: 20),
-          const TestForObserverBloc(),
+          const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: ProfileForm()),
           const SizedBox(height: 60),
           SizedBox(
             width: 250,

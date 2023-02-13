@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:improsso/core/errors/erros.dart';
 import 'package:improsso/domain/auth_domain/repositories/auth_repository.dart';
-import 'package:improsso/domain/user_domain/entities/pictures_entity.dart';
-import 'package:improsso/domain/user_domain/entities/user_entity.dart';
-import 'package:improsso/domain/user_domain/failures/failures.dart';
-import 'package:improsso/domain/user_domain/failures/user_failures.dart';
-import 'package:improsso/domain/user_domain/repositories/user_repository.dart';
+import 'package:improsso/domain/general_domain/entities/pictures_entity.dart';
+import 'package:improsso/domain/general_domain/entities/user_entity.dart';
+import 'package:improsso/domain/general_domain/failures/failures.dart';
+import 'package:improsso/domain/general_domain/failures/user_failures.dart';
+import 'package:improsso/domain/general_domain/repositories/user_repository.dart';
 import 'package:improsso/infrastructure/models/user_model_FIREBASE.dart';
 import 'package:improsso/injection.dart';
 
@@ -106,7 +106,7 @@ class UserRepositoryImpl implements UserRepository {
       User user = FirebaseAuth.instance.currentUser!;
       return FirebaseFirestore.instance.collection("users").doc(user.uid).set({
         "username": input,
-      }).then((value) {
+      }, SetOptions(merge: true)).then((value) {
         return right(unit);
       });
     } catch (e) {

@@ -18,15 +18,7 @@ class _HomeState extends State<Home> {
           children: [
             const Text("HomePage"),
             TextButton(
-                onPressed: () {
-                  FirebaseFirestore.instance
-                      .collection("test")
-                      .doc("testString")
-                      .set({
-                    "random": "does it work?",
-                  });
-                },
-                child: Text("Insert something")),
+                onPressed: () {}, child: const Text("Currently nothing")),
           ],
         ),
       ),

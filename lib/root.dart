@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:improsso/application/user/controller_bloc/controller_bloc.dart';
 import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
 import 'package:improsso/application/user/pictures_bloc/bloc/pictures_bloc.dart';
 import 'presentation/account/account.dart';
@@ -26,6 +27,7 @@ class _RootWidgetState extends State<RootWidget> {
         BlocProvider(
           create: (context) => PicturesBloc()..add(LoadPicturesEvent()),
         ),
+        BlocProvider(create: (context) => ControllerBloc()),
       ],
       child: Scaffold(
         body: IndexedStack(

@@ -38,6 +38,8 @@ class AuthRepositoryImpl implements AuthRepository {
               "email": value.user!.email,
               "id": value.user!.uid,
               "username": username,
+              "universityId": "",
+              "programId": ""
             });
           });
         }
@@ -45,7 +47,7 @@ class AuthRepositoryImpl implements AuthRepository {
         getOutOfInfiniteLoop = true;
       });
       while (!getOutOfInfiniteLoop) {
-        Future.delayed(Duration(milliseconds: 10));
+        Future.delayed(const Duration(milliseconds: 10));
       }
       if (successfull) {
         return right(unit);

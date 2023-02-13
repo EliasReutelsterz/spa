@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:improsso/domain/user_domain/entities/user_entity.dart';
-import 'package:improsso/domain/user_domain/failures/user_failures.dart';
+import 'package:improsso/domain/general_domain/entities/user_entity.dart';
+import 'package:improsso/domain/general_domain/failures/user_failures.dart';
 import 'package:improsso/infrastructure/repositories/user_repository_impl.dart';
 part 'observer_event.dart';
 part 'observer_state.dart';
