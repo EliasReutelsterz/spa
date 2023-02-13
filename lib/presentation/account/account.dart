@@ -13,10 +13,11 @@ class Account extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(children: [
+          const SizedBox(height: 20),
           const ProfilePictureWidget(),
           const SizedBox(height: 20),
           const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 50),
               child: ProfileForm()),
           const SizedBox(height: 60),
           SizedBox(
