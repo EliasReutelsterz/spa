@@ -1,4 +1,4 @@
-# improsso
+# Study Progress App
 
 current color palette:
 https://coolors.co/ffffff-7d3108-f6a579
