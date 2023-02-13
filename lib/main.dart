@@ -13,10 +13,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await di.init();
-  runApp(Improsso());
+  runApp(StudyProgressApp());
 }
 
-class Improsso extends StatelessWidget {
+class StudyProgressApp extends StatelessWidget {
   final _appRouter = r.AppRouter();
 
   @override

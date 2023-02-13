@@ -39,7 +39,7 @@ class _RootWidgetState extends State<RootWidget> {
         ),
         appBar: AppBar(
           title: Text(
-            "Improsso",
+            "Study Progress App",
             style: Theme.of(context).textTheme.headline1,
           ),
           centerTitle: true,

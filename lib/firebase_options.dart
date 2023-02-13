@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '156514679388',
     projectId: 'improsso-700aa',
     storageBucket: 'improsso-700aa.appspot.com',
-    iosClientId: '156514679388-uf5vqj31li30afdo1fpqnt766v2b00cp.apps.googleusercontent.com',
+    iosClientId:
+        '156514679388-uf5vqj31li30afdo1fpqnt766v2b00cp.apps.googleusercontent.com',
     iosBundleId: 'com.example.improsso',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '156514679388',
     projectId: 'improsso-700aa',
     storageBucket: 'improsso-700aa.appspot.com',
-    iosClientId: '156514679388-uf5vqj31li30afdo1fpqnt766v2b00cp.apps.googleusercontent.com',
+    iosClientId:
+        '156514679388-uf5vqj31li30afdo1fpqnt766v2b00cp.apps.googleusercontent.com',
     iosBundleId: 'com.example.improsso',
   );
 }
