@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/user/controller_bloc/controller_bloc.dart';
 import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
 import 'package:improsso/application/user/pictures_bloc/bloc/pictures_bloc.dart';
+import 'package:improsso/application/user/studies_bloc/studies_bloc.dart';
 import 'presentation/account/account.dart';
 import 'presentation/home/home.dart';
 import 'package:improsso/injection.dart' as di;
@@ -28,6 +29,9 @@ class _RootWidgetState extends State<RootWidget> {
           create: (context) => PicturesBloc()..add(LoadPicturesEvent()),
         ),
         BlocProvider(create: (context) => ControllerBloc()),
+        BlocProvider(
+            create: (context) =>
+                StudiesBloc()..add(LoadUniversitiesAndProgramsEvent())),
       ],
       child: Scaffold(
         body: IndexedStack(
