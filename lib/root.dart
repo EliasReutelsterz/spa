@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:improsso/application/user/completedCourses_bloc/completed_courses_bloc.dart';
 import 'package:improsso/application/user/controller_bloc/controller_bloc.dart';
 import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
 import 'package:improsso/application/user/pictures_bloc/bloc/pictures_bloc.dart';
@@ -30,15 +31,18 @@ class _RootWidgetState extends State<RootWidget> {
         ),
         BlocProvider(create: (context) => ControllerBloc()),
         BlocProvider(
+          create: (context) => StudiesBloc()..add(LoadStudiesEvent()),
+        ),
+        BlocProvider(
             create: (context) =>
-                StudiesBloc()..add(LoadUniversitiesAndProgramsEvent())),
+                CompletedCoursesBloc()..add(StreamAllCompletedCourses())),
       ],
       child: Scaffold(
         body: IndexedStack(
           index: _currentIndex,
-          children: const [
+          children: [
             Account(),
-            Home(),
+            const Home(),
           ],
         ),
         appBar: AppBar(

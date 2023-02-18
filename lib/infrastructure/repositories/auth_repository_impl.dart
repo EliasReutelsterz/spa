@@ -38,8 +38,8 @@ class AuthRepositoryImpl implements AuthRepository {
               "email": value.user!.email,
               "id": value.user!.uid,
               "username": username,
-              "universityId": "",
-              "programId": ""
+              "currentUniversityId": "",
+              "currentProgramId": ""
             });
           });
         }

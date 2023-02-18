@@ -3,19 +3,18 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:improsso/core/errors/erros.dart';
 import 'package:improsso/domain/auth_domain/repositories/auth_repository.dart';
+import 'package:improsso/domain/general_domain/entities/studies_entity.dart';
 import 'package:improsso/domain/general_domain/failures/failures.dart';
 import 'package:improsso/domain/general_domain/repositories/studies_repository.dart';
 import 'package:improsso/injection.dart';
 
 class StudiesRepositoryImpl implements StudiesRepository {
   @override
-  Future<Either<Failure, Map<String, Map<String, String>>>>
-      loadUniversityNames() async {
+  Future<Either<Failure, StudiesEntity>> loadUniversityNames() async {
     try {
       final userOption = sl<AuthRepository>().getSignedInUser();
       final currentUser =
           userOption.getOrElse(() => throw NotAuthentificatedError());
-      Map<String, Map<String, String>> mapUnisAndPrograms = {};
       return FirebaseFirestore.instance
           .collection('users')
           .doc(currentUser.id.value)
@@ -31,13 +30,12 @@ class StudiesRepositoryImpl implements StudiesRepository {
                 uni.data() as Map<String, dynamic>;
             mapUniNames[uni.id] = dataOfUni["name"] as String;
           }
-          mapUnisAndPrograms["unis"] = mapUniNames;
-          if (userData["universityId"] as String == "") {
-            mapUnisAndPrograms["programs"] = {};
-            return right(mapUnisAndPrograms);
+          if (userData["currentUniversityId"] as String == "") {
+            return right(StudiesEntity(
+                programsMap: {}, unisMap: mapUniNames, courseMap: {}));
           } else {
             return universities
-                .doc(userData["universityId"] as String)
+                .doc(userData["currentUniversityId"] as String)
                 .collection("programs")
                 .get()
                 .then((programs) {
@@ -47,33 +45,33 @@ class StudiesRepositoryImpl implements StudiesRepository {
                     program.data() as Map<String, dynamic>;
                 mapProgramNames[program.id] = programData["name"] as String;
               }
-              mapUnisAndPrograms["programs"] = mapProgramNames;
-              return right(mapUnisAndPrograms);
+              if (userData["currentProgramId"] as String == "") {
+                return right(StudiesEntity(
+                    unisMap: mapUniNames,
+                    programsMap: mapProgramNames,
+                    courseMap: {}));
+              } else {
+                return universities
+                    .doc(userData["currentUniversityId"] as String)
+                    .collection("programs")
+                    .doc(userData["currentProgramId"])
+                    .collection("courses")
+                    .get()
+                    .then((courses) {
+                  Map<String, Map<String, dynamic>> mapCourses = {};
+                  for (QueryDocumentSnapshot course in courses.docs) {
+                    mapCourses[course.id] =
+                        course.data() as Map<String, dynamic>;
+                  }
+                  return right(StudiesEntity(
+                      unisMap: mapUniNames,
+                      programsMap: mapProgramNames,
+                      courseMap: mapCourses));
+                });
+              }
             });
           }
         });
-      });
-    } catch (e) {
-      return left(GeneralFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<String>>> loadProgramNames(
-      String universityID) async {
-    try {
-      CollectionReference programs = FirebaseFirestore.instance
-          .collection('universities')
-          .doc(universityID)
-          .collection("programs");
-      List<String> listProgramNames = [];
-      return programs.get().then((QuerySnapshot programsSnapshot) {
-        for (QueryDocumentSnapshot program in programsSnapshot.docs) {
-          Map<dynamic, dynamic> dataOfProgram =
-              program.data() as Map<dynamic, dynamic>;
-          listProgramNames.add(dataOfProgram["name"]);
-        }
-        return right(listProgramNames);
       });
     } catch (e) {
       return left(GeneralFailure());

@@ -64,7 +64,7 @@ class LoginForm extends StatelessWidget {
             children: [
               const SizedBox(height: 80),
               Text(
-                "Improsso",
+                "Study Progress App",
                 style: themeData.textTheme.bodyText2!.copyWith(
                     fontSize: 26,
                     fontWeight: FontWeight.w400,

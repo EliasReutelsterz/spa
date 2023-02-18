@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:improsso/domain/general_domain/entities/course_entitiy.dart';
 import 'package:improsso/domain/general_domain/entities/pictures_entity.dart';
 import 'package:improsso/domain/general_domain/entities/user_entity.dart';
 import 'package:improsso/domain/general_domain/failures/failures.dart';
@@ -14,4 +15,19 @@ abstract class UserRepository {
   Future<Either<Failure, Unit>> pickAndUploadProfilePicture();
 
   Future<Either<Failure, Unit>> updateUsername(String input);
+
+  Future<Either<Failure, Unit>> updateCurrentUniversity(String input);
+
+  Future<Either<Failure, Unit>> updateCurrentProgram(String input);
+
+  Stream<Either<Failure, Map<String, CourseEntity>>> getCompletedCourses();
+
+  Future<Either<Failure, Unit>> addCompletedCourse(
+      String courseId,
+      String programId,
+      String uniId,
+      String name,
+      double grade,
+      int ects,
+      String field);
 }

@@ -7,7 +7,7 @@ import 'package:improsso/presentation/account/widgets/programs_dropdown.dart';
 import 'package:improsso/presentation/account/widgets/unis_dropdown.dart';
 
 class Account extends StatelessWidget {
-  const Account({Key? key}) : super(key: key);
+  Account({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

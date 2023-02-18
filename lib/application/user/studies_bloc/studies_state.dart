@@ -11,5 +11,9 @@ class StudiesFailure extends StudiesState {}
 class StudiesSuccess extends StudiesState {
   final Map<String, String> universities;
   final Map<String, String> programs;
-  StudiesSuccess({required this.universities, required this.programs});
+  final Map<String, Map<String, dynamic>> courses;
+  StudiesSuccess(
+      {required this.universities,
+      required this.programs,
+      required this.courses});
 }

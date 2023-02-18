@@ -7,3 +7,15 @@ class UpdateUsernameEvent extends ControllerEvent {
   final String input;
   UpdateUsernameEvent({required this.context, required this.input});
 }
+
+class UpdateCurrentUniversityEvent extends ControllerEvent {
+  final dynamic context;
+  final String input;
+  UpdateCurrentUniversityEvent({required this.context, required this.input});
+}
+
+class UpdateCurrentProgramEvent extends ControllerEvent {
+  final dynamic context;
+  final String input;
+  UpdateCurrentProgramEvent({required this.context, required this.input});
+}

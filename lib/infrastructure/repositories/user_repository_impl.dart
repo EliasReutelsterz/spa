@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:improsso/core/errors/erros.dart';
 import 'package:improsso/domain/auth_domain/repositories/auth_repository.dart';
+import 'package:improsso/domain/general_domain/entities/course_entitiy.dart';
 import 'package:improsso/domain/general_domain/entities/pictures_entity.dart';
 import 'package:improsso/domain/general_domain/entities/user_entity.dart';
 import 'package:improsso/domain/general_domain/failures/failures.dart';
 import 'package:improsso/domain/general_domain/failures/user_failures.dart';
 import 'package:improsso/domain/general_domain/repositories/user_repository.dart';
-import 'package:improsso/infrastructure/models/user_model_FIREBASE.dart';
 import 'package:improsso/injection.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -21,12 +21,17 @@ class UserRepositoryImpl implements UserRepository {
     final userOption = sl<AuthRepository>().getSignedInUser();
     final currentUser =
         userOption.getOrElse(() => throw NotAuthentificatedError());
-    //statt der drei Zeilen hier drüber auch möglich: User user = FirebaseAuth.instance.currentUser!;
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     Stream<Either<UserFailure, UserEntity>> userEntityStream =
         users.doc(currentUser.id.value).snapshots().map((snapshot) {
-      return right<UserFailure, UserEntity>(
-          UserModelFIREBASE.fromFirestoreAsDocument(snapshot).toDomain());
+      Map<String, dynamic> userdocData =
+          snapshot.data() as Map<String, dynamic>;
+      return right<UserFailure, UserEntity>(UserEntity(
+          id: currentUser.id,
+          username: userdocData["username"] as String,
+          email: userdocData["email"] as String,
+          currentUniversityId: userdocData["currentUniversityId"] as String,
+          currentProgramId: userdocData["currentProgramId"] as String));
     }).handleError((e) {
       if (e is FirebaseException) {
         if (e.code.contains('permission-denied') ||
@@ -106,6 +111,95 @@ class UserRepositoryImpl implements UserRepository {
       User user = FirebaseAuth.instance.currentUser!;
       return FirebaseFirestore.instance.collection("users").doc(user.uid).set({
         "username": input,
+      }, SetOptions(merge: true)).then((value) {
+        return right(unit);
+      });
+    } catch (e) {
+      return left(GeneralFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateCurrentUniversity(String input) async {
+    try {
+      User user = FirebaseAuth.instance.currentUser!;
+      return FirebaseFirestore.instance.collection("users").doc(user.uid).set({
+        "currentUniversityId": input,
+      }, SetOptions(merge: true)).then((value) {
+        return right(unit);
+      });
+    } catch (e) {
+      return left(GeneralFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateCurrentProgram(String input) async {
+    try {
+      User user = FirebaseAuth.instance.currentUser!;
+      return FirebaseFirestore.instance.collection("users").doc(user.uid).set({
+        "currentProgramId": input,
+      }, SetOptions(merge: true)).then((value) {
+        return right(unit);
+      });
+    } catch (e) {
+      return left(GeneralFailure());
+    }
+  }
+
+  @override
+  Stream<Either<Failure, Map<String, CourseEntity>>>
+      getCompletedCourses() async* {
+    final userOption = sl<AuthRepository>().getSignedInUser();
+    final currentUser =
+        userOption.getOrElse(() => throw NotAuthentificatedError());
+    CollectionReference coursesRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser.id.value)
+        .collection("courses");
+
+    yield* coursesRef.snapshots().map((snapshot) {
+      Map<String, CourseEntity> coursesMap = {};
+      for (QueryDocumentSnapshot<Object?> course in snapshot.docs) {
+        coursesMap[course.id] = CourseEntity(
+            uniId: course["uniId"],
+            programId: course["programId"],
+            name: course["name"],
+            grade: course["grade"],
+            ects: course["ects"],
+            field: course["field"]);
+      }
+      return right<Failure, Map<String, CourseEntity>>(coursesMap);
+    }).handleError((e) {
+      return left(GeneralFailure());
+    });
+  }
+
+  @override
+  Future<Either<Failure, Unit>> addCompletedCourse(
+      String courseId,
+      String programId,
+      String uniId,
+      String name,
+      double grade,
+      int ects,
+      String field) async {
+    final userOption = sl<AuthRepository>().getSignedInUser();
+    final currentUser =
+        userOption.getOrElse(() => throw NotAuthentificatedError());
+    try {
+      return FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentUser.id.value)
+          .collection("courses")
+          .doc(courseId)
+          .set({
+        "uniId": uniId,
+        "programId": programId,
+        "name": name,
+        "grade": grade,
+        "ects": ects,
+        "field": field,
       }, SetOptions(merge: true)).then((value) {
         return right(unit);
       });

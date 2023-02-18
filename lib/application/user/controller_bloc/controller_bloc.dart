@@ -26,5 +26,39 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
         });
       });
     });
+
+    on<UpdateCurrentUniversityEvent>((event, emit) async {
+      UserRepositoryImpl userRepositoryImpl = UserRepositoryImpl();
+      await userRepositoryImpl
+          .updateCurrentUniversity(event.input)
+          .then((failureOrUnit) {
+        failureOrUnit.fold((failure) {
+          ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content: Text(
+                  "Ups, updating university gone wrong. Please try again!")));
+          return emit(ControllerUpdateCurrentUniversityFailure());
+        }, (unit) {
+          return emit(ControllerUpdateCurrentUniversitySuccess());
+        });
+      });
+    });
+
+    on<UpdateCurrentProgramEvent>((event, emit) async {
+      UserRepositoryImpl userRepositoryImpl = UserRepositoryImpl();
+      await userRepositoryImpl
+          .updateCurrentProgram(event.input)
+          .then((failureOrUnit) {
+        failureOrUnit.fold((failure) {
+          ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content:
+                  Text("Ups, updating program gone wrong. Please try again!")));
+          return emit(ControllerUpdateCurrentProgramFailure());
+        }, (unit) {
+          return emit(ControllerUpdateCurrentProgramSuccess());
+        });
+      });
+    });
   }
 }

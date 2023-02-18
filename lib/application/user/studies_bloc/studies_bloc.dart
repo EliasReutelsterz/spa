@@ -6,16 +6,17 @@ part 'studies_state.dart';
 
 class StudiesBloc extends Bloc<StudiesEvent, StudiesState> {
   StudiesBloc() : super(StudiesInitial()) {
-    on<LoadUniversitiesAndProgramsEvent>((event, emit) async {
+    on<LoadStudiesEvent>((event, emit) async {
       StudiesRepositoryImpl studiesRepositoryImpl = StudiesRepositoryImpl();
       await studiesRepositoryImpl
           .loadUniversityNames()
-          .then((failureOrUnisAndProgramsMap) {
-        failureOrUnisAndProgramsMap.fold(
+          .then((failureOrstudiesEntity) {
+        failureOrstudiesEntity.fold(
             (failure) => emit(StudiesFailure()),
-            (unisAndProgramsMaps) => emit(StudiesSuccess(
-                universities: unisAndProgramsMaps["unis"]!,
-                programs: unisAndProgramsMaps["programs"]!)));
+            (studiesEntity) => emit(StudiesSuccess(
+                universities: studiesEntity.unisMap,
+                programs: studiesEntity.programsMap,
+                courses: studiesEntity.courseMap)));
       });
     });
   }
