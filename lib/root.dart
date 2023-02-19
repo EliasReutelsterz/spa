@@ -5,6 +5,7 @@ import 'package:improsso/application/user/controller_bloc/controller_bloc.dart';
 import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
 import 'package:improsso/application/user/pictures_bloc/bloc/pictures_bloc.dart';
 import 'package:improsso/application/user/studies_bloc/studies_bloc.dart';
+import 'package:improsso/presentation/courses/courses.dart';
 import 'presentation/account/account.dart';
 import 'presentation/home/home.dart';
 import 'package:improsso/injection.dart' as di;
@@ -43,6 +44,7 @@ class _RootWidgetState extends State<RootWidget> {
           children: [
             Account(),
             const Home(),
+            const Courses(),
           ],
         ),
         appBar: AppBar(
@@ -69,6 +71,10 @@ class _RootWidgetState extends State<RootWidget> {
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: "Courses",
             ),
           ],
           backgroundColor: Theme.of(context).bottomAppBarColor,
