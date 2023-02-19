@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Data {
-  List<DropdownMenuItem> getSemesterListAsDropDownItems() {
+  List<String> getSemesterList() {
     List<String> semesters = [
       "HWS 2017",
       "FSS 2018",
@@ -25,11 +25,6 @@ class Data {
       "FSS 2027",
       "HWS 2027"
     ];
-    List<DropdownMenuItem> dropDownItemList = [];
-    for (String semester in semesters) {
-      dropDownItemList
-          .add(DropdownMenuItem(value: semester, child: Text(semester)));
-    }
-    return dropDownItemList;
+    return semesters;
   }
 }

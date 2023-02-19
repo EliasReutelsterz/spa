@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:improsso/domain/general_domain/entities/course_entitiy.dart';
 import 'package:improsso/infrastructure/repositories/user_repository_impl.dart';
 
 part 'controller_event.dart';
@@ -57,6 +58,26 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
           return emit(ControllerUpdateCurrentProgramFailure());
         }, (unit) {
           return emit(ControllerUpdateCurrentProgramSuccess());
+        });
+      });
+    });
+
+    on<AddCompletedCourseEvent>((event, emit) async {
+      UserRepositoryImpl userRepositoryImpl = UserRepositoryImpl();
+      await userRepositoryImpl
+          .addCompletedCourse(event.courseEntity)
+          .then((failureOrUnit) {
+        failureOrUnit.fold((failure) {
+          ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content:
+                  Text("Ups, adding course gone wrong. Please try again!")));
+          return emit(ControllerAddedCompletedCourseFailure());
+        }, (unit) {
+          ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.greenAccent,
+              content: Text("Course added!")));
+          return emit(ControllerAddedCompletedCourseSuccess());
         });
       });
     });

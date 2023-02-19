@@ -168,7 +168,8 @@ class UserRepositoryImpl implements UserRepository {
             grade: course["grade"],
             ects: course["ects"],
             field: course["field"],
-            semester: course["semester"]);
+            semester: course["semester"],
+            id: course.id);
       }
       return right<Failure, Map<String, CourseEntity>>(coursesMap);
     }).handleError((e) {
@@ -178,14 +179,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, Unit>> addCompletedCourse(
-      String courseId,
-      String programId,
-      String uniId,
-      String name,
-      double grade,
-      int ects,
-      String field,
-      String semester) async {
+      CourseEntity courseEntity) async {
     final userOption = sl<AuthRepository>().getSignedInUser();
     final currentUser =
         userOption.getOrElse(() => throw NotAuthentificatedError());
@@ -194,15 +188,15 @@ class UserRepositoryImpl implements UserRepository {
           .collection("users")
           .doc(currentUser.id.value)
           .collection("courses")
-          .doc(courseId)
+          .doc(courseEntity.id)
           .set({
-        "uniId": uniId,
-        "programId": programId,
-        "name": name,
-        "grade": grade,
-        "ects": ects,
-        "field": field,
-        "semester": semester
+        "uniId": courseEntity.uniId,
+        "programId": courseEntity.programId,
+        "name": courseEntity.name,
+        "grade": courseEntity.grade,
+        "ects": courseEntity.ects,
+        "field": courseEntity.field,
+        "semester": courseEntity.semester
       }, SetOptions(merge: true)).then((value) {
         return right(unit);
       });

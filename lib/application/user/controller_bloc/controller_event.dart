@@ -19,3 +19,9 @@ class UpdateCurrentProgramEvent extends ControllerEvent {
   final String input;
   UpdateCurrentProgramEvent({required this.context, required this.input});
 }
+
+class AddCompletedCourseEvent extends ControllerEvent {
+  final dynamic context;
+  final CourseEntity courseEntity;
+  AddCompletedCourseEvent({required this.context, required this.courseEntity});
+}

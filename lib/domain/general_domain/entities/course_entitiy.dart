@@ -8,6 +8,7 @@ class CourseEntity {
   final int ects;
   final String field;
   final String semester;
+  final String id;
 
   CourseEntity(
       {required this.uniId,
@@ -16,5 +17,6 @@ class CourseEntity {
       required this.grade,
       required this.ects,
       required this.field,
-      required this.semester});
+      required this.semester,
+      required this.id});
 }

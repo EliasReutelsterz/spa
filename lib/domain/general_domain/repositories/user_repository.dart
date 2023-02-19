@@ -22,13 +22,5 @@ abstract class UserRepository {
 
   Stream<Either<Failure, Map<String, CourseEntity>>> getCompletedCourses();
 
-  Future<Either<Failure, Unit>> addCompletedCourse(
-      String courseId,
-      String programId,
-      String uniId,
-      String name,
-      double grade,
-      int ects,
-      String field,
-      String semester);
+  Future<Either<Failure, Unit>> addCompletedCourse(CourseEntity courseEntity);
 }

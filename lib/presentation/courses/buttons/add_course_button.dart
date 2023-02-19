@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/user/completedCourses_bloc/completed_courses_bloc.dart';
+import 'package:improsso/application/user/controller_bloc/controller_bloc.dart';
 import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
 import 'package:improsso/application/user/studies_bloc/studies_bloc.dart';
 import 'package:improsso/domain/general_domain/usecases/general_usecases.dart';
@@ -10,6 +11,7 @@ class AddCourseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ControllerBloc controllerbloc = BlocProvider.of<ControllerBloc>(context);
     GeneralUsecases generalUsecases = GeneralUsecases();
     return BlocBuilder<CompletedCoursesBloc, CompletedCoursesState>(
       builder: (context, completedCoursesState) {
@@ -36,7 +38,8 @@ class AddCourseButton extends StatelessWidget {
                                         : generalUsecases.getListForAddCourses(
                                             observerState.userEntity,
                                             studiesState.courses,
-                                            completedCoursesState.courses),
+                                            completedCoursesState.courses,
+                                            controllerbloc),
                                   ),
                                   actions: [
                                     TextButton(
