@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/auth/signup_bloc/signupform_bloc.dart';
-import 'package:improsso/core/validators/form_validators.dart';
+import 'package:improsso/core/validators/signup_validators.dart';
 import 'package:improsso/domain/auth_domain/failures/auth_failures.dart';
 import 'package:improsso/presentation/signup/widgets/login_register_button.dart';
 import 'package:improsso/routes/router.gr.dart';
@@ -53,7 +53,7 @@ class RegisterForm extends StatelessWidget {
       },
       builder: (context, state) {
         // TODO: dependency injection anwenden
-        FormValidators formValidators = FormValidators();
+        SignUpValidators formValidators = SignUpValidators();
         return Form(
           autovalidateMode: state.showValidationMessages
               ? AutovalidateMode.always

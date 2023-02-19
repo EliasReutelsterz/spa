@@ -7,6 +7,7 @@ class CourseEntity {
   final double grade;
   final int ects;
   final String field;
+  final String semester;
 
   CourseEntity(
       {required this.uniId,
@@ -14,5 +15,6 @@ class CourseEntity {
       required this.name,
       required this.grade,
       required this.ects,
-      required this.field});
+      required this.field,
+      required this.semester});
 }

@@ -167,7 +167,8 @@ class UserRepositoryImpl implements UserRepository {
             name: course["name"],
             grade: course["grade"],
             ects: course["ects"],
-            field: course["field"]);
+            field: course["field"],
+            semester: course["semester"]);
       }
       return right<Failure, Map<String, CourseEntity>>(coursesMap);
     }).handleError((e) {
@@ -183,7 +184,8 @@ class UserRepositoryImpl implements UserRepository {
       String name,
       double grade,
       int ects,
-      String field) async {
+      String field,
+      String semester) async {
     final userOption = sl<AuthRepository>().getSignedInUser();
     final currentUser =
         userOption.getOrElse(() => throw NotAuthentificatedError());
@@ -200,6 +202,7 @@ class UserRepositoryImpl implements UserRepository {
         "grade": grade,
         "ects": ects,
         "field": field,
+        "semester": semester
       }, SetOptions(merge: true)).then((value) {
         return right(unit);
       });

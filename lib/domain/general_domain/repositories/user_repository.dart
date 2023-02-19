@@ -29,5 +29,6 @@ abstract class UserRepository {
       String name,
       double grade,
       int ects,
-      String field);
+      String field,
+      String semester);
 }

@@ -1,4 +1,4 @@
-class FormValidators {
+class SignUpValidators {
   late String email;
   late String username;
   late String password;
