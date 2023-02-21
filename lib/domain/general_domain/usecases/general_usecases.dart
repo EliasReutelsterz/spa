@@ -7,7 +7,6 @@ import 'package:improsso/presentation/courses/buttons/add_selected_course_button
 
 class GeneralUsecases {
   List<Widget> getListForAddCourses(
-    UserEntity userEntity,
     Map<String, GeneralCourseEntity> courses,
     Map<String, CompletedCourseEntity> completedCourses,
     ControllerBloc controllerbloc,

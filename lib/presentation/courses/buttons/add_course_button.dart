@@ -37,7 +37,6 @@ class AddCourseButton extends StatelessWidget {
                                                 "You havent selected your program yet")
                                           ]
                                         : generalUsecases.getListForAddCourses(
-                                            observerState.userEntity,
                                             studiesState.courses,
                                             completedCoursesState.courses,
                                             controllerbloc),
