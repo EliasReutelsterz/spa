@@ -27,7 +27,8 @@ class DeleteSelectedCourseButton extends StatelessWidget {
                               controllerBloc.add(DeleteCompletedCourseEvent(
                                   context: context,
                                   courseEntity: completedCourseEntity));
-                              return Navigator.pop(context);
+                              return Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
                             },
                             child: const Text("I am sure, delete it!")),
                         TextButton(

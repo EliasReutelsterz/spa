@@ -81,7 +81,8 @@ class AddSelectedCourseButton extends StatelessWidget {
                                         field: course.field,
                                         semester: formValidators.semester,
                                         id: courseId)));
-                                return Navigator.pop(context);
+                                return Navigator.of(context)
+                                    .popUntil((route) => route.isFirst);
                               }
                             },
                             child: const Text("Add")),
