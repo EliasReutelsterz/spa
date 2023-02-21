@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:improsso/core/errors/erros.dart';
 import 'package:improsso/domain/auth_domain/repositories/auth_repository.dart';
-import 'package:improsso/domain/general_domain/entities/course_entitiy.dart';
+import 'package:improsso/domain/general_domain/entities/completed_course_entitiy.dart';
 import 'package:improsso/domain/general_domain/entities/pictures_entity.dart';
 import 'package:improsso/domain/general_domain/entities/user_entity.dart';
 import 'package:improsso/domain/general_domain/failures/failures.dart';
@@ -148,7 +148,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Stream<Either<Failure, Map<String, CourseEntity>>>
+  Stream<Either<Failure, Map<String, CompletedCourseEntity>>>
       getCompletedCourses() async* {
     final userOption = sl<AuthRepository>().getSignedInUser();
     final currentUser =
@@ -159,9 +159,9 @@ class UserRepositoryImpl implements UserRepository {
         .collection("courses");
 
     yield* coursesRef.snapshots().map((snapshot) {
-      Map<String, CourseEntity> coursesMap = {};
+      Map<String, CompletedCourseEntity> coursesMap = {};
       for (QueryDocumentSnapshot<Object?> course in snapshot.docs) {
-        coursesMap[course.id] = CourseEntity(
+        coursesMap[course.id] = CompletedCourseEntity(
             uniId: course["uniId"],
             programId: course["programId"],
             name: course["name"],
@@ -171,7 +171,7 @@ class UserRepositoryImpl implements UserRepository {
             semester: course["semester"],
             id: course.id);
       }
-      return right<Failure, Map<String, CourseEntity>>(coursesMap);
+      return right<Failure, Map<String, CompletedCourseEntity>>(coursesMap);
     }).handleError((e) {
       return left(GeneralFailure());
     });
@@ -179,7 +179,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, Unit>> addCompletedCourse(
-      CourseEntity courseEntity) async {
+      CompletedCourseEntity courseEntity) async {
     final userOption = sl<AuthRepository>().getSignedInUser();
     final currentUser =
         userOption.getOrElse(() => throw NotAuthentificatedError());
@@ -198,6 +198,27 @@ class UserRepositoryImpl implements UserRepository {
         "field": courseEntity.field,
         "semester": courseEntity.semester
       }, SetOptions(merge: true)).then((value) {
+        return right(unit);
+      });
+    } catch (e) {
+      return left(GeneralFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deleteCompletedCourse(
+      CompletedCourseEntity courseEntity) async {
+    final userOption = sl<AuthRepository>().getSignedInUser();
+    final currentUser =
+        userOption.getOrElse(() => throw NotAuthentificatedError());
+    try {
+      return FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentUser.id.value)
+          .collection("courses")
+          .doc(courseEntity.id)
+          .delete()
+          .then((value) {
         return right(unit);
       });
     } catch (e) {

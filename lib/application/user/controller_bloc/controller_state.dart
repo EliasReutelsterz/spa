@@ -19,3 +19,7 @@ class ControllerUpdateCurrentProgramFailure extends ControllerState {}
 class ControllerAddedCompletedCourseSuccess extends ControllerState {}
 
 class ControllerAddedCompletedCourseFailure extends ControllerState {}
+
+class ControllerDeletedCompletedCourseSuccess extends ControllerState {}
+
+class ControllerDeletedCompletedCourseFailure extends ControllerState {}

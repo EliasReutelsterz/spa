@@ -22,6 +22,13 @@ class UpdateCurrentProgramEvent extends ControllerEvent {
 
 class AddCompletedCourseEvent extends ControllerEvent {
   final dynamic context;
-  final CourseEntity courseEntity;
+  final CompletedCourseEntity courseEntity;
   AddCompletedCourseEvent({required this.context, required this.courseEntity});
+}
+
+class DeleteCompletedCourseEvent extends ControllerEvent {
+  final dynamic context;
+  final CompletedCourseEntity courseEntity;
+  DeleteCompletedCourseEvent(
+      {required this.context, required this.courseEntity});
 }

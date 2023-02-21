@@ -1,5 +1,5 @@
 import 'package:improsso/domain/auth_domain/entities/id.dart';
-import 'package:improsso/domain/general_domain/entities/course_entitiy.dart';
+import 'package:improsso/domain/general_domain/entities/completed_course_entitiy.dart';
 
 class UserEntity {
   final UniqueID id;

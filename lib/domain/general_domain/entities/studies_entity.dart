@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:improsso/domain/general_domain/entities/general_course_entity.dart';
+import 'package:improsso/domain/general_domain/entities/program_entity.dart';
+import 'package:improsso/domain/general_domain/entities/uni_entity.dart';
 
 class StudiesEntity {
-  final Map<String, String> unisMap;
-  final Map<String, String> programsMap;
-  final Map<String, Map<String, dynamic>> courseMap;
+  final Map<String, UniEntity> unisMap;
+  final Map<String, ProgramEntity> programsMap;
+  final Map<String, GeneralCourseEntity> courseMap;
 
   StudiesEntity(
       {required this.unisMap,

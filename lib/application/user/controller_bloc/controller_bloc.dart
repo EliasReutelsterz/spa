@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:improsso/domain/general_domain/entities/course_entitiy.dart';
+import 'package:improsso/domain/general_domain/entities/completed_course_entitiy.dart';
 import 'package:improsso/infrastructure/repositories/user_repository_impl.dart';
 
 part 'controller_event.dart';
@@ -78,6 +78,26 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
               backgroundColor: Colors.greenAccent,
               content: Text("Course added!")));
           return emit(ControllerAddedCompletedCourseSuccess());
+        });
+      });
+    });
+
+    on<DeleteCompletedCourseEvent>((event, emit) async {
+      UserRepositoryImpl userRepositoryImpl = UserRepositoryImpl();
+      await userRepositoryImpl
+          .deleteCompletedCourse(event.courseEntity)
+          .then((failureOrUnit) {
+        failureOrUnit.fold((failure) {
+          ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.redAccent,
+              content:
+                  Text("Ups, deleting course gone wrong. Please try again!")));
+          return emit(ControllerDeletedCompletedCourseFailure());
+        }, (unit) {
+          ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.greenAccent,
+              content: Text("Course deleted!")));
+          return emit(ControllerDeletedCompletedCourseSuccess());
         });
       });
     });

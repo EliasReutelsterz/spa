@@ -3,28 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/user/controller_bloc/controller_bloc.dart';
 import 'package:improsso/core/data.dart';
 import 'package:improsso/core/validators/add_course_validators.dart';
-import 'package:improsso/domain/general_domain/entities/course_entitiy.dart';
+import 'package:improsso/domain/general_domain/entities/completed_course_entitiy.dart';
+import 'package:improsso/domain/general_domain/entities/general_course_entity.dart';
 
-class AddSelectedCourseButton extends StatefulWidget {
-  final Map<String, dynamic> course;
+class AddSelectedCourseButton extends StatelessWidget {
+  final GeneralCourseEntity course;
   final String courseId;
   final ControllerBloc controllerBloc;
-  const AddSelectedCourseButton(
+  AddSelectedCourseButton(
       {Key? key,
       required this.course,
       required this.courseId,
       required this.controllerBloc})
       : super(key: key);
 
-  @override
-  State<AddSelectedCourseButton> createState() =>
-      _AddSelectedCourseButtonState();
-}
-
-class _AddSelectedCourseButtonState extends State<AddSelectedCourseButton> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  AddCourseValidators formValidators = AddCourseValidators();
-  Data data = Data();
+  final AddCourseValidators formValidators = AddCourseValidators();
+  final Data data = Data();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +28,7 @@ class _AddSelectedCourseButtonState extends State<AddSelectedCourseButton> {
           showDialog(
               context: context,
               builder: (contextDialog) => AlertDialog(
-                      title: Text("Add ${widget.course['name']}"),
+                      title: Text("Add ${course.name}"),
                       content: Form(
                           autovalidateMode: AutovalidateMode.disabled,
                           key: _formKey,
@@ -75,19 +70,17 @@ class _AddSelectedCourseButtonState extends State<AddSelectedCourseButton> {
                         TextButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                widget.controllerBloc.add(
-                                    AddCompletedCourseEvent(
-                                        context: context,
-                                        courseEntity: CourseEntity(
-                                            uniId: widget.course["uniId"],
-                                            programId:
-                                                widget.course["programId"],
-                                            name: widget.course["name"],
-                                            grade: formValidators.grade,
-                                            ects: widget.course["ects"],
-                                            field: widget.course["field"],
-                                            semester: formValidators.semester,
-                                            id: widget.courseId)));
+                                controllerBloc.add(AddCompletedCourseEvent(
+                                    context: context,
+                                    courseEntity: CompletedCourseEntity(
+                                        uniId: course.uniId,
+                                        programId: course.programId,
+                                        name: course.name,
+                                        grade: formValidators.grade,
+                                        ects: course.ects,
+                                        field: course.field,
+                                        semester: formValidators.semester,
+                                        id: courseId)));
                                 return Navigator.pop(context);
                               }
                             },
@@ -97,6 +90,6 @@ class _AddSelectedCourseButtonState extends State<AddSelectedCourseButton> {
                             child: const Text("Cancel")),
                       ]));
         },
-        child: Text(widget.course["name"]));
+        child: Text(course.name));
   }
 }

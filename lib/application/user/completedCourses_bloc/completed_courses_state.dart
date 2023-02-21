@@ -8,7 +8,7 @@ class CompletedCoursesInitial extends CompletedCoursesState {}
 class CompletedCoursesLoading extends CompletedCoursesState {}
 
 class CompletedCoursesSuccess extends CompletedCoursesState {
-  final Map<String, CourseEntity> courses;
+  final Map<String, CompletedCourseEntity> courses;
   CompletedCoursesSuccess({required this.courses});
 }
 

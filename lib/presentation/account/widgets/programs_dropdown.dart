@@ -22,7 +22,7 @@ class ProgramsDropdown extends StatelessWidget {
                       .map<DropdownMenuItem<String>>((String key) {
                     return DropdownMenuItem<String>(
                       value: key,
-                      child: Text(studiesState.programs[key]!),
+                      child: Text(studiesState.programs[key]!.name),
                     );
                   }).toList()
                     ..add(const DropdownMenuItem<String>(

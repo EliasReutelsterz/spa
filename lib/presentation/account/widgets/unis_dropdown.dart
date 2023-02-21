@@ -22,7 +22,7 @@ class UnisDropdown extends StatelessWidget {
                       .map<DropdownMenuItem<String>>((String key) {
                     return DropdownMenuItem<String>(
                         value: key,
-                        child: Text(studiesState.universities[key]!));
+                        child: Text(studiesState.universities[key]!.name));
                   }).toList(),
                   onChanged: (String? selectedValue) {
                     BlocProvider.of<ControllerBloc>(context).add(

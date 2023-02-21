@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:improsso/domain/general_domain/entities/course_entitiy.dart';
+import 'package:improsso/domain/general_domain/entities/completed_course_entitiy.dart';
 import 'package:improsso/domain/general_domain/failures/failures.dart';
 import 'package:improsso/infrastructure/repositories/user_repository_impl.dart';
 import 'package:meta/meta.dart';
@@ -12,7 +12,7 @@ part 'completed_courses_state.dart';
 
 class CompletedCoursesBloc
     extends Bloc<CompletedCoursesEvent, CompletedCoursesState> {
-  StreamSubscription<Either<Failure, Map<String, CourseEntity>>>?
+  StreamSubscription<Either<Failure, Map<String, CompletedCourseEntity>>>?
       _userdataStreamSub;
   CompletedCoursesBloc() : super(CompletedCoursesInitial()) {
     on<CompletedCoursesEvent>((event, emit) async {

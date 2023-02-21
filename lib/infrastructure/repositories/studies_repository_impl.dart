@@ -3,7 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:improsso/core/errors/erros.dart';
 import 'package:improsso/domain/auth_domain/repositories/auth_repository.dart';
+import 'package:improsso/domain/general_domain/entities/general_course_entity.dart';
+import 'package:improsso/domain/general_domain/entities/program_entity.dart';
 import 'package:improsso/domain/general_domain/entities/studies_entity.dart';
+import 'package:improsso/domain/general_domain/entities/uni_entity.dart';
 import 'package:improsso/domain/general_domain/failures/failures.dart';
 import 'package:improsso/domain/general_domain/repositories/studies_repository.dart';
 import 'package:improsso/injection.dart';
@@ -23,12 +26,13 @@ class StudiesRepositoryImpl implements StudiesRepository {
         Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
         CollectionReference universities =
             FirebaseFirestore.instance.collection('universities');
-        Map<String, String> mapUniNames = {};
+        Map<String, UniEntity> mapUniNames = {};
         return universities.get().then((QuerySnapshot unisSnapshot) {
           for (QueryDocumentSnapshot uni in unisSnapshot.docs) {
             Map<dynamic, dynamic> dataOfUni =
                 uni.data() as Map<String, dynamic>;
-            mapUniNames[uni.id] = dataOfUni["name"] as String;
+            mapUniNames[uni.id] =
+                UniEntity(name: dataOfUni["name"] as String, id: uni.id);
           }
           if (userData["currentUniversityId"] as String == "") {
             return right(StudiesEntity(
@@ -39,11 +43,12 @@ class StudiesRepositoryImpl implements StudiesRepository {
                 .collection("programs")
                 .get()
                 .then((programs) {
-              Map<String, String> mapProgramNames = {};
+              Map<String, ProgramEntity> mapProgramNames = {};
               for (QueryDocumentSnapshot program in programs.docs) {
                 Map<String, dynamic> programData =
                     program.data() as Map<String, dynamic>;
-                mapProgramNames[program.id] = programData["name"] as String;
+                mapProgramNames[program.id] = ProgramEntity(
+                    name: programData["name"] as String, id: program.id);
               }
               if (userData["currentProgramId"] as String == "") {
                 return right(StudiesEntity(
@@ -58,10 +63,17 @@ class StudiesRepositoryImpl implements StudiesRepository {
                     .collection("courses")
                     .get()
                     .then((courses) {
-                  Map<String, Map<String, dynamic>> mapCourses = {};
+                  Map<String, GeneralCourseEntity> mapCourses = {};
                   for (QueryDocumentSnapshot course in courses.docs) {
-                    mapCourses[course.id] =
+                    Map<String, dynamic> courseData =
                         course.data() as Map<String, dynamic>;
+                    mapCourses[course.id] = GeneralCourseEntity(
+                        uniId: userData["currentUniversityId"] as String,
+                        programId: userData["currentProgramId"] as String,
+                        name: courseData["name"] as String,
+                        ects: courseData["ects"] as int,
+                        field: courseData["field"] as String,
+                        id: course.id);
                   }
                   return right(StudiesEntity(
                       unisMap: mapUniNames,

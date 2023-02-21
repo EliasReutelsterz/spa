@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
 import 'package:improsso/application/user/studies_bloc/studies_bloc.dart';
@@ -17,7 +15,7 @@ class CurrentStudies extends StatelessWidget {
             if (studiesState is StudiesSuccess &&
                 observerState is ObserverSuccess) {
               return Text(
-                  "Your current studies: ${studiesState.programs[observerState.userEntity.currentProgramId]} at ${studiesState.universities[observerState.userEntity.currentUniversityId]}");
+                  "Your current studies: ${studiesState.programs[observerState.userEntity.currentProgramId]!.name} at ${studiesState.universities[observerState.userEntity.currentUniversityId]!.name}");
             } else {
               return const Placeholder();
             }

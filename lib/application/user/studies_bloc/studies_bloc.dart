@@ -1,4 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:improsso/domain/general_domain/entities/general_course_entity.dart';
+import 'package:improsso/domain/general_domain/entities/program_entity.dart';
+import 'package:improsso/domain/general_domain/entities/uni_entity.dart';
 import 'package:improsso/infrastructure/repositories/studies_repository_impl.dart';
 
 part 'studies_event.dart';

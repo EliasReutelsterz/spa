@@ -30,7 +30,8 @@ class AddCourseButton extends StatelessWidget {
                           builder: (contex) => AlertDialog(
                                   title: const Text("Add course"),
                                   content: Column(
-                                    children: studiesState.courses.isEmpty
+                                    children: observerState
+                                            .userEntity.currentProgramId.isEmpty
                                         ? [
                                             const Text(
                                                 "You havent selected your program yet")

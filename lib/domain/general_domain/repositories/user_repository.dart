@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:improsso/domain/general_domain/entities/course_entitiy.dart';
+import 'package:improsso/domain/general_domain/entities/completed_course_entitiy.dart';
 import 'package:improsso/domain/general_domain/entities/pictures_entity.dart';
 import 'package:improsso/domain/general_domain/entities/user_entity.dart';
 import 'package:improsso/domain/general_domain/failures/failures.dart';
@@ -20,7 +20,12 @@ abstract class UserRepository {
 
   Future<Either<Failure, Unit>> updateCurrentProgram(String input);
 
-  Stream<Either<Failure, Map<String, CourseEntity>>> getCompletedCourses();
+  Stream<Either<Failure, Map<String, CompletedCourseEntity>>>
+      getCompletedCourses();
 
-  Future<Either<Failure, Unit>> addCompletedCourse(CourseEntity courseEntity);
+  Future<Either<Failure, Unit>> addCompletedCourse(
+      CompletedCourseEntity courseEntity);
+
+  Future<Either<Failure, Unit>> deleteCompletedCourse(
+      CompletedCourseEntity courseEntity);
 }

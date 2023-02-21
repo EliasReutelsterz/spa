@@ -9,9 +9,9 @@ class StudiesLoading extends StudiesState {}
 class StudiesFailure extends StudiesState {}
 
 class StudiesSuccess extends StudiesState {
-  final Map<String, String> universities;
-  final Map<String, String> programs;
-  final Map<String, Map<String, dynamic>> courses;
+  final Map<String, UniEntity> universities;
+  final Map<String, ProgramEntity> programs;
+  final Map<String, GeneralCourseEntity> courses;
   StudiesSuccess(
       {required this.universities,
       required this.programs,
