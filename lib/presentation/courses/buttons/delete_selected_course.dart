@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:improsso/application/user/controller_bloc/controller_bloc.dart';
 import 'package:improsso/domain/general_domain/entities/completed_course_entitiy.dart';
@@ -27,8 +26,6 @@ class DeleteSelectedCourseButton extends StatelessWidget {
                               controllerBloc.add(DeleteCompletedCourseEvent(
                                   context: context,
                                   courseEntity: completedCourseEntity));
-                              return Navigator.of(context)
-                                  .popUntil((route) => route.isFirst);
                             },
                             child: const Text("I am sure, delete it!")),
                         TextButton(

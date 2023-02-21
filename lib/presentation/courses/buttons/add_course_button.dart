@@ -4,7 +4,9 @@ import 'package:improsso/application/user/completedCourses_bloc/completed_course
 import 'package:improsso/application/user/controller_bloc/controller_bloc.dart';
 import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
 import 'package:improsso/application/user/studies_bloc/studies_bloc.dart';
+import 'package:improsso/domain/general_domain/entities/general_course_entity.dart';
 import 'package:improsso/domain/general_domain/usecases/general_usecases.dart';
+import 'package:improsso/presentation/courses/buttons/add_selected_course_button.dart';
 
 class AddCourseButton extends StatelessWidget {
   const AddCourseButton({Key? key}) : super(key: key);
@@ -22,6 +24,9 @@ class AddCourseButton extends StatelessWidget {
                 if (studiesState is StudiesSuccess &&
                     observerState is ObserverSuccess &&
                     completedCoursesState is CompletedCoursesSuccess) {
+                  Map<String, GeneralCourseEntity> cleanedList =
+                      generalUsecases.getListForAddCourses(
+                          studiesState.courses, completedCoursesState.courses);
                   return TextButton(
                     child: const Text("Add Course"),
                     onPressed: () {
@@ -36,10 +41,12 @@ class AddCourseButton extends StatelessWidget {
                                             const Text(
                                                 "You havent selected your program yet")
                                           ]
-                                        : generalUsecases.getListForAddCourses(
-                                            studiesState.courses,
-                                            completedCoursesState.courses,
-                                            controllerbloc),
+                                        : cleanedList.keys.map((key) {
+                                            return AddSelectedCourseButton(
+                                                course: cleanedList[key]!,
+                                                courseId: key,
+                                                controllerBloc: controllerbloc);
+                                          }).toList(),
                                   ),
                                   actions: [
                                     TextButton(

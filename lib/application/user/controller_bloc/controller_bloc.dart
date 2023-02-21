@@ -67,6 +67,7 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
       await userRepositoryImpl
           .addCompletedCourse(event.courseEntity)
           .then((failureOrUnit) {
+        Navigator.of(event.context).popUntil((route) => route.isFirst);
         failureOrUnit.fold((failure) {
           ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
               backgroundColor: Colors.redAccent,
@@ -87,6 +88,7 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
       await userRepositoryImpl
           .deleteCompletedCourse(event.courseEntity)
           .then((failureOrUnit) {
+        Navigator.of(event.context).popUntil((route) => route.isFirst);
         failureOrUnit.fold((failure) {
           ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(
               backgroundColor: Colors.redAccent,

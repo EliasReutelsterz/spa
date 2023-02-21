@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/user/controller_bloc/controller_bloc.dart';
 import 'package:improsso/core/data.dart';
 import 'package:improsso/core/validators/add_course_validators.dart';
@@ -81,8 +80,6 @@ class AddSelectedCourseButton extends StatelessWidget {
                                         field: course.field,
                                         semester: formValidators.semester,
                                         id: courseId)));
-                                return Navigator.of(context)
-                                    .popUntil((route) => route.isFirst);
                               }
                             },
                             child: const Text("Add")),
