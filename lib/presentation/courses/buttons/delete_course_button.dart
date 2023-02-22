@@ -18,7 +18,10 @@ class DeleteCourseButton extends StatelessWidget {
             if (observerState is ObserverSuccess &&
                 completedCoursesState is CompletedCoursesSuccess) {
               return TextButton(
-                child: const Text("Delete Course"),
+                style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.secondary),
+                child: Text("Delete Course",
+                    style: Theme.of(context).textTheme.headline1),
                 onPressed: () {
                   showDialog(
                       context: context,

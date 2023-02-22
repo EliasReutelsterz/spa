@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  static const Color _bottomAppBarColor = Color(0xff7D3108);
-  static const Color _appBarColor = Color(0xff7D3108);
+  static const Color _bottomAppBarColor = Color(0xff1A3A3A);
+  static const Color _appBarColor = Color(0xff1A3A3A);
   static const Color _scaffoldBackgroundCoor = Colors.white;
-  static const Color _primary = Color(0xff7D3108);
-  static const Color _secondary = Color(0xffF6A579);
-  static const Color _tertiary = Color.fromARGB(255, 206, 182, 159);
+  static const Color _primary = Color(0xff1A3A3A);
+  static const Color _secondary = Color.fromARGB(255, 243, 186, 156);
+  static const Color _tertiary = Color.fromARGB(255, 230, 238, 238);
   static const Color _onPrimary = Colors.white;
   static const Color _primaryTextColor = Colors.white;
-  static const Color _secondaryTextColor = Color(0xff7D3108);
+  static const Color _secondaryTextColor = Colors.black;
   static const Color _iconColor = Colors.white;
 
   static const TextStyle _headingText1 = TextStyle(

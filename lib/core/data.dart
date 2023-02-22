@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Data {
   List<String> getSemesterList() {
     List<String> semesters = [

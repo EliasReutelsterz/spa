@@ -28,7 +28,11 @@ class AddCourseButton extends StatelessWidget {
                       generalUsecases.getListForAddCourses(
                           studiesState.courses, completedCoursesState.courses);
                   return TextButton(
-                    child: const Text("Add Course"),
+                    style: TextButton.styleFrom(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.secondary),
+                    child: Text("Add Course",
+                        style: Theme.of(context).textTheme.headline1),
                     onPressed: () {
                       showDialog(
                           context: context,
