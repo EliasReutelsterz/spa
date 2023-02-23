@@ -5,11 +5,11 @@ import 'package:improsso/core/validators/add_course_validators.dart';
 import 'package:improsso/domain/general_domain/entities/completed_course_entitiy.dart';
 import 'package:improsso/domain/general_domain/entities/general_course_entity.dart';
 
-class AddSelectedCourseButton extends StatelessWidget {
+class AddGradedSelectedCourseButton extends StatelessWidget {
   final GeneralCourseEntity course;
   final String courseId;
   final ControllerBloc controllerBloc;
-  AddSelectedCourseButton(
+  AddGradedSelectedCourseButton(
       {Key? key,
       required this.course,
       required this.courseId,
@@ -76,6 +76,7 @@ class AddSelectedCourseButton extends StatelessWidget {
                                         programId: course.programId,
                                         name: course.name,
                                         grade: formValidators.grade,
+                                        graded: course.graded,
                                         ects: course.ects,
                                         field: course.field,
                                         semester: formValidators.semester,
@@ -88,6 +89,11 @@ class AddSelectedCourseButton extends StatelessWidget {
                             child: const Text("Cancel")),
                       ]));
         },
-        child: Text(course.name));
+        child: Text(
+          course.name,
+          overflow: TextOverflow.fade,
+          maxLines: 1,
+          softWrap: false,
+        ));
   }
 }

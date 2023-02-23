@@ -161,15 +161,28 @@ class UserRepositoryImpl implements UserRepository {
     yield* coursesRef.snapshots().map((snapshot) {
       Map<String, CompletedCourseEntity> coursesMap = {};
       for (QueryDocumentSnapshot<Object?> course in snapshot.docs) {
-        coursesMap[course.id] = CompletedCourseEntity(
-            uniId: course["uniId"],
-            programId: course["programId"],
-            name: course["name"],
-            grade: course["grade"],
-            ects: course["ects"],
-            field: course["field"],
-            semester: course["semester"],
-            id: course.id);
+        if (course["graded"]) {
+          coursesMap[course.id] = CompletedCourseEntity(
+              uniId: course["uniId"],
+              programId: course["programId"],
+              name: course["name"],
+              graded: course["graded"],
+              grade: course["grade"],
+              ects: course["ects"],
+              field: course["field"],
+              semester: course["semester"],
+              id: course.id);
+        } else {
+          coursesMap[course.id] = CompletedCourseEntity(
+              uniId: course["uniId"],
+              programId: course["programId"],
+              name: course["name"],
+              graded: course["graded"],
+              ects: course["ects"],
+              field: course["field"],
+              semester: course["semester"],
+              id: course.id);
+        }
       }
       return right<Failure, Map<String, CompletedCourseEntity>>(coursesMap);
     }).handleError((e) {
@@ -184,22 +197,42 @@ class UserRepositoryImpl implements UserRepository {
     final currentUser =
         userOption.getOrElse(() => throw NotAuthentificatedError());
     try {
-      return FirebaseFirestore.instance
-          .collection("users")
-          .doc(currentUser.id.value)
-          .collection("courses")
-          .doc(courseEntity.id)
-          .set({
-        "uniId": courseEntity.uniId,
-        "programId": courseEntity.programId,
-        "name": courseEntity.name,
-        "grade": courseEntity.grade,
-        "ects": courseEntity.ects,
-        "field": courseEntity.field,
-        "semester": courseEntity.semester
-      }, SetOptions(merge: true)).then((value) {
-        return right(unit);
-      });
+      if (courseEntity.graded) {
+        return FirebaseFirestore.instance
+            .collection("users")
+            .doc(currentUser.id.value)
+            .collection("courses")
+            .doc(courseEntity.id)
+            .set({
+          "uniId": courseEntity.uniId,
+          "programId": courseEntity.programId,
+          "name": courseEntity.name,
+          "grade": courseEntity.grade,
+          "graded": courseEntity.graded,
+          "ects": courseEntity.ects,
+          "field": courseEntity.field,
+          "semester": courseEntity.semester
+        }, SetOptions(merge: true)).then((value) {
+          return right(unit);
+        });
+      } else {
+        return FirebaseFirestore.instance
+            .collection("users")
+            .doc(currentUser.id.value)
+            .collection("courses")
+            .doc(courseEntity.id)
+            .set({
+          "uniId": courseEntity.uniId,
+          "programId": courseEntity.programId,
+          "name": courseEntity.name,
+          "graded": courseEntity.graded,
+          "ects": courseEntity.ects,
+          "field": courseEntity.field,
+          "semester": courseEntity.semester
+        }, SetOptions(merge: true)).then((value) {
+          return right(unit);
+        });
+      }
     } catch (e) {
       return left(GeneralFailure());
     }

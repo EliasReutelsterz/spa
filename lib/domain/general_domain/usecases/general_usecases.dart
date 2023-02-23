@@ -28,7 +28,7 @@ class GeneralUsecases {
     }
     Data data = Data();
     List<String> semesterList = data.getSemesterList();
-    Map.fromEntries(output.entries.toList()
+    output = Map.fromEntries(output.entries.toList()
       ..sort((e1, e2) => semesterList
           .indexOf(e1.key)
           .compareTo(semesterList.indexOf(e2.key))));

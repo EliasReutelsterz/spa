@@ -5,6 +5,7 @@ class GeneralCourseEntity {
   final int ects;
   final String field;
   final String id;
+  final bool graded;
 
   GeneralCourseEntity(
       {required this.uniId,
@@ -12,5 +13,6 @@ class GeneralCourseEntity {
       required this.name,
       required this.ects,
       required this.field,
-      required this.id});
+      required this.id,
+      required this.graded});
 }

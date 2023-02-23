@@ -33,6 +33,11 @@ class DeleteSelectedCourseButton extends StatelessWidget {
                             child: const Text("Cancel")),
                       ]));
         },
-        child: Text(completedCourseEntity.name));
+        child: Text(
+          completedCourseEntity.name,
+          overflow: TextOverflow.fade,
+          maxLines: 1,
+          softWrap: false,
+        ));
   }
 }

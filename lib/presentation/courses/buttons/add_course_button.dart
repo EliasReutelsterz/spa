@@ -6,7 +6,8 @@ import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
 import 'package:improsso/application/user/studies_bloc/studies_bloc.dart';
 import 'package:improsso/domain/general_domain/entities/general_course_entity.dart';
 import 'package:improsso/domain/general_domain/usecases/general_usecases.dart';
-import 'package:improsso/presentation/courses/buttons/add_selected_course_button.dart';
+import 'package:improsso/presentation/courses/buttons/add_graded_selected_course_button.dart';
+import 'package:improsso/presentation/courses/buttons/add_ungraded_selected_course_button.dart';
 
 class AddCourseButton extends StatelessWidget {
   const AddCourseButton({Key? key}) : super(key: key);
@@ -46,10 +47,19 @@ class AddCourseButton extends StatelessWidget {
                                                 "You havent selected your program yet")
                                           ]
                                         : cleanedList.keys.map((key) {
-                                            return AddSelectedCourseButton(
-                                                course: cleanedList[key]!,
-                                                courseId: key,
-                                                controllerBloc: controllerbloc);
+                                            if (cleanedList[key]!.graded) {
+                                              return AddGradedSelectedCourseButton(
+                                                  course: cleanedList[key]!,
+                                                  courseId: key,
+                                                  controllerBloc:
+                                                      controllerbloc);
+                                            } else {
+                                              return AddUnGradedSelectedCourseButton(
+                                                  course: cleanedList[key]!,
+                                                  courseId: key,
+                                                  controllerBloc:
+                                                      controllerbloc);
+                                            }
                                           }).toList(),
                                   ),
                                   actions: [

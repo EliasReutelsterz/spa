@@ -22,7 +22,68 @@ class TableCompletedCourses extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   children: [
-                    Text(completedCoursesState.courses[courseId]!.name)
+                    SizedBox(
+                      width: 130,
+                      child: Text(
+                        completedCoursesState.courses[courseId]!.name,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        softWrap: false,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      width: 1,
+                      height: 20,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(width: 10),
+                    SizedBox(
+                      width: 18,
+                      child: Text(
+                        completedCoursesState.courses[courseId]!.ects
+                            .toString(),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        softWrap: false,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      width: 1,
+                      height: 20,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(width: 10),
+                    SizedBox(
+                      width: 20,
+                      child: Text(
+                        completedCoursesState.courses[courseId]!.graded
+                            ? completedCoursesState.courses[courseId]!.grade
+                                .toString()
+                            : "/",
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        softWrap: false,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      width: 1,
+                      height: 20,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        completedCoursesState.courses[courseId]!.field,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        softWrap: false,
+                      ),
+                    ),
                   ],
                 ),
               ));

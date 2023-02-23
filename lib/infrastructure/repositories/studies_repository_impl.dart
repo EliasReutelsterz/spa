@@ -73,6 +73,7 @@ class StudiesRepositoryImpl implements StudiesRepository {
                         name: courseData["name"] as String,
                         ects: courseData["ects"] as int,
                         field: courseData["field"] as String,
+                        graded: courseData["graded"] as bool,
                         id: course.id);
                   }
                   return right(StudiesEntity(
