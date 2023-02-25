@@ -48,7 +48,9 @@ class StudiesRepositoryImpl implements StudiesRepository {
                 Map<String, dynamic> programData =
                     program.data() as Map<String, dynamic>;
                 mapProgramNames[program.id] = ProgramEntity(
-                    name: programData["name"] as String, id: program.id);
+                    name: programData["name"] as String,
+                    id: program.id,
+                    totalEcts: programData["totalEcts"] as int);
               }
               if (userData["currentProgramId"] as String == "") {
                 return right(StudiesEntity(
