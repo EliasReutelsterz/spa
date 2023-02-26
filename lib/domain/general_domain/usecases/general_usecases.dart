@@ -2,6 +2,7 @@ import 'package:improsso/core/data.dart';
 import 'package:improsso/domain/general_domain/entities/completed_course_entitiy.dart';
 import 'package:improsso/domain/general_domain/entities/general_course_entity.dart';
 import 'package:improsso/domain/general_domain/entities/main_plot_data_point_entity.dart';
+import 'package:improsso/domain/general_domain/entities/pie_chart_data_point_entity.dart';
 import 'package:improsso/domain/general_domain/entities/user_entity.dart';
 
 class GeneralUsecases {
@@ -92,5 +93,24 @@ class GeneralUsecases {
       }
     }
     return double.parse((grade / sumEcts).toStringAsFixed(1));
+  }
+
+  static List<PieChartDataPointEntity> getPieChartDataList(
+      Map<String, CompletedCourseEntity> completedCourses) {
+    Map<String, int> fieldMap = {};
+    List<PieChartDataPointEntity> outputList = [];
+    for (CompletedCourseEntity completedCourse in completedCourses.values) {
+      if (fieldMap.containsKey(completedCourse.field)) {
+        fieldMap[completedCourse.field] =
+            fieldMap[completedCourse.field]! + completedCourse.ects;
+      } else {
+        fieldMap[completedCourse.field] = completedCourse.ects;
+      }
+    }
+    for (String field in fieldMap.keys) {
+      outputList
+          .add(PieChartDataPointEntity(field: field, ects: fieldMap[field]!));
+    }
+    return outputList;
   }
 }

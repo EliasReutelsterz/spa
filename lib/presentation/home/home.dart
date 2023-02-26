@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:improsso/presentation/home/widgets/fields_pie_chart.dart';
 import 'package:improsso/presentation/home/widgets/main_plot.dart';
 import 'package:improsso/presentation/home/widgets/progress_bar.dart';
 
@@ -17,6 +18,7 @@ class Home extends StatelessWidget {
               ProgressBar(),
               SizedBox(height: 40),
               MainPlot(),
+              FieldsPieChart(),
             ],
           ),
         ),
