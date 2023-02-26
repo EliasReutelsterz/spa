@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:improsso/presentation/home/widgets/TestPlot.dart';
+import 'package:improsso/presentation/home/widgets/main_plot.dart';
 import 'package:improsso/presentation/home/widgets/progress_bar.dart';
 
 class Home extends StatelessWidget {
@@ -11,13 +11,12 @@ class Home extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: const [
-              Text("HomePage -> erstmal nur Logik"),
               ProgressBar(),
-              SizedBox(height: 20),
-              TestPlot(),
+              SizedBox(height: 40),
+              MainPlot(),
             ],
           ),
         ),

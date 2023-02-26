@@ -15,7 +15,6 @@ class AddCourseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ControllerBloc controllerbloc = BlocProvider.of<ControllerBloc>(context);
-    GeneralUsecases generalUsecases = GeneralUsecases();
     return BlocBuilder<CompletedCoursesBloc, CompletedCoursesState>(
       builder: (context, completedCoursesState) {
         return BlocBuilder<StudiesBloc, StudiesState>(
@@ -26,7 +25,7 @@ class AddCourseButton extends StatelessWidget {
                     observerState is ObserverSuccess &&
                     completedCoursesState is CompletedCoursesSuccess) {
                   Map<String, GeneralCourseEntity> cleanedList =
-                      generalUsecases.getListForAddCourses(
+                      GeneralUsecases.getListForAddCourses(
                           studiesState.courses, completedCoursesState.courses);
                   return TextButton(
                     style: TextButton.styleFrom(

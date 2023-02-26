@@ -1,0 +1,8 @@
+class MainPlotDataPointEntity {
+  final String semester;
+  final int ects;
+  final double averageGrade;
+
+  MainPlotDataPointEntity(
+      {required this.semester, required this.ects, required this.averageGrade});
+}

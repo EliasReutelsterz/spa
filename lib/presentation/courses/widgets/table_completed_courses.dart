@@ -11,9 +11,9 @@ class TableCompletedCourses extends StatelessWidget {
     return BlocBuilder<CompletedCoursesBloc, CompletedCoursesState>(
       builder: (context, completedCoursesState) {
         if (completedCoursesState is CompletedCoursesSuccess) {
-          GeneralUsecases generalUsecases = GeneralUsecases();
-          Map<String, List<String>> semestersMap = generalUsecases
-              .getSemestersOfCompletedCourses(completedCoursesState.courses);
+          Map<String, List<String>> semestersMap =
+              GeneralUsecases.getSemestersOfCompletedCourses(
+                  completedCoursesState.courses);
           List<Widget> semesterWidgets = [];
           for (String semester in semestersMap.keys) {
             List<Widget> courseWidgets = [];
