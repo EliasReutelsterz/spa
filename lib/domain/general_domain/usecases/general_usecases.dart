@@ -37,8 +37,8 @@ class GeneralUsecases {
     return output;
   }
 
-  static int getSumEcts(Map<String, CompletedCourseEntity> courses) {
-    int sumEcts = 0;
+  static double getSumEcts(Map<String, CompletedCourseEntity> courses) {
+    double sumEcts = 0;
     for (CompletedCourseEntity completedCourse in courses.values) {
       sumEcts += completedCourse.ects;
     }
@@ -62,8 +62,8 @@ class GeneralUsecases {
           .indexOf(e1.key)
           .compareTo(semesterList.indexOf(e2.key))));
     for (String key in semesterMap.keys) {
-      int sumEctsPerSemester = 0;
-      int sumEctsPerSemesterWithoutGraded = 0;
+      double sumEctsPerSemester = 0;
+      double sumEctsPerSemesterWithoutGraded = 0;
       double averageGrade = 0.0;
       for (CompletedCourseEntity completedCourse in semesterMap[key]!) {
         sumEctsPerSemester += completedCourse.ects;
@@ -85,7 +85,7 @@ class GeneralUsecases {
   static double getTotalAverageGrade(
       Map<String, CompletedCourseEntity> completedCourses) {
     double grade = 0.0;
-    int sumEcts = 0;
+    double sumEcts = 0;
     for (CompletedCourseEntity completedCourse in completedCourses.values) {
       if (completedCourse.graded) {
         grade += completedCourse.ects * completedCourse.grade!;
@@ -97,7 +97,7 @@ class GeneralUsecases {
 
   static List<PieChartDataPointEntity> getPieChartDataList(
       Map<String, CompletedCourseEntity> completedCourses) {
-    Map<String, int> fieldMap = {};
+    Map<String, double> fieldMap = {};
     List<PieChartDataPointEntity> outputList = [];
     for (CompletedCourseEntity completedCourse in completedCourses.values) {
       if (fieldMap.containsKey(completedCourse.field)) {

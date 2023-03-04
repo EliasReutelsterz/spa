@@ -39,7 +39,7 @@ class FieldsPieChart extends StatelessWidget {
                     explodeAll: true)
               ]);
         } else {
-          return const Placeholder();
+          return const SizedBox();
         }
       },
     );

@@ -19,7 +19,7 @@ class ProgressBar extends StatelessWidget {
                 if (observerState is ObserverSuccess &&
                     studiesState is StudiesSuccess &&
                     completedCoursesState is CompletedCoursesSuccess) {
-                  int sumDoneEcts =
+                  double sumDoneEcts =
                       GeneralUsecases.getSumEcts(completedCoursesState.courses);
                   int totalEcts = studiesState
                       .programs[observerState.userEntity.currentProgramId]!
@@ -44,7 +44,10 @@ class ProgressBar extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return const Placeholder();
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 40.0),
+                    child: CircularProgressIndicator(),
+                  );
                 }
               },
             );

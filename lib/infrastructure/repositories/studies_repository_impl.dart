@@ -73,7 +73,7 @@ class StudiesRepositoryImpl implements StudiesRepository {
                         uniId: userData["currentUniversityId"] as String,
                         programId: userData["currentProgramId"] as String,
                         name: courseData["name"] as String,
-                        ects: courseData["ects"] as int,
+                        ects: courseData["ects"].toDouble(),
                         field: courseData["field"] as String,
                         graded: courseData["graded"] as bool,
                         id: course.id);

@@ -64,7 +64,7 @@ class MainPlot extends StatelessWidget {
             ],
           );
         } else {
-          return const Placeholder();
+          return const SizedBox();
         }
       },
     );

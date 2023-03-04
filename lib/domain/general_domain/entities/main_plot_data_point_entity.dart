@@ -1,6 +1,6 @@
 class MainPlotDataPointEntity {
   final String semester;
-  final int ects;
+  final double ects;
   final double averageGrade;
 
   MainPlotDataPointEntity(

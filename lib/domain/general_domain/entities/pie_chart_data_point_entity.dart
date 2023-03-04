@@ -1,5 +1,5 @@
 class PieChartDataPointEntity {
   final String field;
-  final int ects;
+  final double ects;
   PieChartDataPointEntity({required this.field, required this.ects});
 }

@@ -2,7 +2,7 @@ class GeneralCourseEntity {
   final String uniId;
   final String programId;
   final String name;
-  final int ects;
+  final double ects;
   final String field;
   final String id;
   final bool graded;

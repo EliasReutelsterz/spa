@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:improsso/presentation/account/buttons/delete_account_button.dart';
 import 'package:improsso/presentation/account/buttons/log_out_button.dart';
+import 'package:improsso/presentation/account/buttons/switch_theme_button.dart';
 import 'package:improsso/presentation/account/widgets/profile_form.dart';
 import 'package:improsso/presentation/account/widgets/profile_picture_widget.dart';
 import 'package:improsso/presentation/account/widgets/programs_dropdown.dart';
@@ -29,11 +30,13 @@ class Account extends StatelessWidget {
                   ProgramsDropdown(),
                 ],
               )),
-          const SizedBox(height: 60),
+          const SizedBox(height: 30),
           SizedBox(
             width: 250,
             child: Column(
               children: const [
+                SwitchThemeButton(),
+                SizedBox(height: 30),
                 LogOutButton(),
                 SizedBox(height: 10),
                 DeleteAccountButton(),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:improsso/application/user/observer_bloc/observer_bloc.dart';
@@ -24,7 +23,10 @@ class CurrentStudies extends StatelessWidget {
                 ),
               );
             } else {
-              return const Placeholder();
+              return const Padding(
+                padding: EdgeInsets.only(top: 40.0),
+                child: CircularProgressIndicator(),
+              );
             }
           },
         );
