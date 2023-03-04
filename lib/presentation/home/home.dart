@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:improsso/presentation/home/widgets/fields_pie_chart.dart';
+import 'package:improsso/presentation/home/widgets/main_plot.dart';
+import 'package:improsso/presentation/home/widgets/progress_bar.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -8,10 +11,16 @@ class Home extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: const [
-            Text("HomePage -> erstmal nur Logik"),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: const [
+              ProgressBar(),
+              SizedBox(height: 40),
+              MainPlot(),
+              FieldsPieChart(),
+            ],
+          ),
         ),
       ),
     );

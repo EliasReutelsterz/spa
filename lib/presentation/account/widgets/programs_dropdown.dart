@@ -35,7 +35,7 @@ class ProgramsDropdown extends StatelessWidget {
                         .add(LoadStudiesEvent());
                   });
             } else {
-              return const Placeholder();
+              return const SizedBox();
             }
           },
         );

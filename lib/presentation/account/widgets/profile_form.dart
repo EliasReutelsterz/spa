@@ -27,7 +27,10 @@ class ProfileForm extends StatelessWidget {
             decoration: const InputDecoration(labelText: "Username"),
           );
         } else {
-          return const Placeholder();
+          return const Padding(
+            padding: EdgeInsets.only(top: 40.0),
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );

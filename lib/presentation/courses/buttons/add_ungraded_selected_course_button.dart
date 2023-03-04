@@ -18,7 +18,6 @@ class AddUnGradedSelectedCourseButton extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AddCourseValidators formValidators = AddCourseValidators();
-  final Data data = Data();
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +37,7 @@ class AddUnGradedSelectedCourseButton extends StatelessWidget {
                                 padding: const EdgeInsets.all(10),
                                 children: [
                                   DropdownButtonFormField(
-                                    items: data
-                                        .getSemesterList()
+                                    items: Data.semesters
                                         .map<DropdownMenuItem<String>>(
                                             (String semester) {
                                       return DropdownMenuItem<String>(
@@ -48,7 +46,7 @@ class AddUnGradedSelectedCourseButton extends StatelessWidget {
                                       );
                                     }).toList(),
                                     onChanged: (dynamic input) {},
-                                    value: "FSS 2023",
+                                    value: Data.defaultDropdownSemester,
                                     decoration: const InputDecoration(
                                         labelText: "Semester"),
                                     validator: formValidators.validate_semester,

@@ -55,7 +55,7 @@ class _RootWidgetState extends State<RootWidget> {
           centerTitle: true,
         ),
         bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Theme.of(context).colorScheme.onPrimary,
+          selectedItemColor: Theme.of(context).colorScheme.secondary,
           unselectedItemColor: Theme.of(context).colorScheme.tertiary,
           onTap: (index) {
             setState(() {
