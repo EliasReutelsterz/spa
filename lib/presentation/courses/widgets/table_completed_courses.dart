@@ -11,9 +11,9 @@ class TableCompletedCourses extends StatelessWidget {
     return BlocBuilder<CompletedCoursesBloc, CompletedCoursesState>(
       builder: (context, completedCoursesState) {
         if (completedCoursesState is CompletedCoursesSuccess) {
-          GeneralUsecases generalUsecases = GeneralUsecases();
-          Map<String, List<String>> semestersMap = generalUsecases
-              .getSemestersOfCompletedCourses(completedCoursesState.courses);
+          Map<String, List<String>> semestersMap =
+              GeneralUsecases.getSemestersOfCompletedCourses(
+                  completedCoursesState.courses);
           List<Widget> semesterWidgets = [];
           for (String semester in semestersMap.keys) {
             List<Widget> courseWidgets = [];
@@ -23,7 +23,7 @@ class TableCompletedCourses extends StatelessWidget {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 130,
+                      width: 140,
                       child: Text(
                         completedCoursesState.courses[courseId]!.name,
                         overflow: TextOverflow.fade,
@@ -39,10 +39,11 @@ class TableCompletedCourses extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     SizedBox(
-                      width: 18,
+                      width: 25,
                       child: Text(
                         completedCoursesState.courses[courseId]!.ects
-                            .toString(),
+                        .toStringAsFixed(completedCoursesState.courses[courseId]!.ects
+                        .truncateToDouble() == completedCoursesState.courses[courseId]!.ects ? 0 : 1),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.fade,
                         maxLines: 1,
@@ -57,7 +58,7 @@ class TableCompletedCourses extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     SizedBox(
-                      width: 20,
+                      width: 25,
                       child: Text(
                         completedCoursesState.courses[courseId]!.graded
                             ? completedCoursesState.courses[courseId]!.grade
@@ -110,7 +111,7 @@ class TableCompletedCourses extends StatelessWidget {
             children: semesterWidgets,
           );
         } else {
-          return const Placeholder();
+          return const SizedBox();
         }
       },
     );

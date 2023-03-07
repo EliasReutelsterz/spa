@@ -3,7 +3,7 @@ class CompletedCourseEntity {
   final String programId;
   final String name;
   final double? grade;
-  final int ects;
+  final double ects;
   final String field;
   final String semester;
   final String id;

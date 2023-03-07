@@ -168,7 +168,7 @@ class UserRepositoryImpl implements UserRepository {
               name: course["name"],
               graded: course["graded"],
               grade: course["grade"],
-              ects: course["ects"],
+              ects: course["ects"].toDouble(),
               field: course["field"],
               semester: course["semester"],
               id: course.id);
@@ -178,7 +178,7 @@ class UserRepositoryImpl implements UserRepository {
               programId: course["programId"],
               name: course["name"],
               graded: course["graded"],
-              ects: course["ects"],
+              ects: course["ects"].toDouble(),
               field: course["field"],
               semester: course["semester"],
               id: course.id);
