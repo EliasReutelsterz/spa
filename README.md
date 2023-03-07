@@ -18,4 +18,4 @@ current color-palette: <a href="https://coolors.co/1a3a3a-f3ba9c-41bfd9">here</a
   <img src="https://github.com/EliasReutelsterz/spa/blob/main/readme_images/login_bright.png" width="170" alt="Account"/>
   <img src="https://github.com/EliasReutelsterz/spa/blob/main/readme_images/home_bright.png" width="170" alt="Home"/>
   <img src="https://github.com/EliasReutelsterz/spa/blob/main/readme_images/delete_course_dark.png" width="170" alt="Courses"/>
-</p>
+</p> 
